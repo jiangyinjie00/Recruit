@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.JobRequireEntityMapperExt">
+    <resultMap id="JobRequireExtBaseResultMap" type="JobRequireEntityExt">
+        <id column="JOBREQUIRE_JOBREQUIREID" property="jobrequireid" />
+        <result column="JOBREQUIRE_JOBRECRUITID" property="jobrecruitid" />
+        <result column="JOBREQUIRE_MARKFORDELETE" property="markfordelete" />
+        <result column="JOBREQUIRE_DESCRIPTION" property="description" />
+    </resultMap>
+
+    <resultMap id="JobRequireExtResultMap" type="JobRequireEntityExt" extends="JobRequireExtBaseResultMap">
+        
+    </resultMap>
+
+    <sql id="JobRequireBaseColumn">
+        _JobRequire.JobRequireID AS JOBREQUIRE_JOBREQUIREID,
+        _JobRequire.JobRecruitID AS JOBREQUIRE_JOBRECRUITID,
+        _JobRequire.MarkForDelete AS JOBREQUIRE_MARKFORDELETE,
+        _JobRequire.Description AS JOBREQUIRE_DESCRIPTION
+    </sql>
+    
+    <insert id="saveJobRequire" parameterType="JobRequireEntityExt" >
+        <selectKey resultType="java.lang.Integer" keyProperty="jobrequireid" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+            JobRequire (
+                JobRequireID,
+                JobRecruitID, 
+                MarkForDelete,
+                Description
+            ) VALUES (
+                #{jobrequireid},
+                #{jobrecruitid}, 
+                #{markfordelete},
+                #{description}
+            )
+    </insert>
+    
+    <update id="updateJobRequire" parameterType="JobRequireEntityExt">
+        UPDATE
+            JobRequire
+        SET
+            JobRecruitID = #{jobrecruitid},
+            MarkForDelete = #{markfordelete},
+            Description = #{description}
+        WHERE
+            JobRequireID = #{jobrequireid}
+    </update>
+    
+    <update id="markForDeleteJobRequire" parameterType="JobRequireEntityExt">
+        UPDATE
+            JobRequire
+        SET
+            MarkForDelete = true
+        WHERE
+            JobRequireID = #{jobrequireid}
+    </update>
+    
+    <delete id="deleteJobRequire" parameterType="java.lang.Integer">
+        DELETE FROM
+            JobRequire
+        WHERE
+            JobRequireID = #{jobRequireID}
+  </delete>
+</mapper>

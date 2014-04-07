@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+<!--     <properties url="${project.basedir}/src/main/resources/jdbc.properties" /> -->
+
+    <context id="DBContext" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="${jdbc.driverClassName}" connectionURL="${jdbc.databaseRecruitUrl}"
+            userId="${jdbc.userName}" password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        
+        <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+        <javaModelGenerator targetPackage="com.yzu.recruit.dataaccess.model.gen"
+            targetProject="src/main/java">
+        </javaModelGenerator>
+
+        <!--对应的xml mapper文件 -->
+        <sqlMapGenerator targetPackage="com.yzu.recruit.dataaccess.xml.gen"
+            targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <!-- 对应的dao接口 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yzu.recruit.dataaccess.mapper.gen"
+            targetProject="src/main/java">
+        </javaClientGenerator>
+
+        <table tableName="Department" domainObjectName="DepartmentEntity">
+            <generatedKey column="DepartmentID" sqlStatement="MySql" />
+        </table>
+        <table tableName="JobRecruit" domainObjectName="JobRecruitEntity">
+            <generatedKey column="JobRecruitID" sqlStatement="MySql" />
+        </table>
+        <table tableName="Education" domainObjectName="EducationEntity">
+            <generatedKey column="EducationID" sqlStatement="MySql" />
+        </table>
+        <table tableName="Experience" domainObjectName="ExperienceEntity">
+            <generatedKey column="ExperienceID" sqlStatement="MySql" />
+        </table>
+        <table tableName="Job" domainObjectName="JobEntity">
+            <generatedKey column="JobID" sqlStatement="MySql" />
+        </table>
+        <table tableName="JobRequest" domainObjectName="JobRequestEntity">
+            <generatedKey column="JobRequestID" sqlStatement="MySql" />
+        </table>
+        <table tableName="JobRequestHistory" domainObjectName="JobRequestHistoryEntity">
+            <generatedKey column="JobRequestHistoryID" sqlStatement="MySql" />
+        </table>
+        <table tableName="JobRequire" domainObjectName="JobRequireEntity">
+            <generatedKey column="JobRequireID" sqlStatement="MySql" />
+        </table>
+        <table tableName="JobResponsibility" domainObjectName="JobResponsibilityEntity">
+            <generatedKey column="JobResponsibilityID" sqlStatement="MySql" />
+        </table>
+
+        <table tableName="Role" domainObjectName="RoleEntity">
+            <generatedKey column="RoleID" sqlStatement="MySql" />
+        </table>
+        <table tableName="Status" domainObjectName="StatusEntity">
+            <generatedKey column="StatusID" sqlStatement="MySql" />
+        </table>
+        <table tableName="System" domainObjectName="SystemEntity">
+            <generatedKey column="SystemID" sqlStatement="MySql" />
+        </table>
+        <table tableName="User" domainObjectName="UserEntity">
+            <generatedKey column="UserID" sqlStatement="MySql" />
+        </table>
+        <table tableName="UserInfo" domainObjectName="UserInfoEntity">
+            <generatedKey column="UserInfoID" sqlStatement="MySql" />
+        </table>
+    </context>
+
+</generatorConfiguration>

@@ -1,0 +1,23 @@
+<div class="maxwidth" ng-init="init()">
+
+    <div>
+        <ul ng-show="currentUser.roleID == 4">
+            <li><a href="#/addRecruit">添加招聘</a></li>
+        </ul>
+        <ul ng-show="currentUser.roleID == 3">
+            <li><a href="#/audition">未发布面试</a></li>
+            <li><a href="#/editRecruit">招聘申请</a></li>
+        </ul>
+    </div>
+
+     <div id="grid" class="gridStyle" ng-grid="gridOptions"></div>
+     <div>
+         <span id="no-records-span" class="span3" ng-show="!hasRecords">没有数据</span>
+     </div>
+
+     <div id="grid-footer" class="row-fluid grid-footer">
+         <span id="paginationInfo" class="pagination-info" ng-show="hasRecords"> </span>
+         <pagination boundary-links="true" num-pages="list.paging.pageCount" current-page="list.paging.currPage" max-size="3"></pagination>
+     </div>
+     
+</div>

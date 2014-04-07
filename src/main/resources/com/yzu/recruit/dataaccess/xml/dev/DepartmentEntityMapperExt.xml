@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt">
+    <resultMap id="DepartmentExtBaseResultMap" type="DepartmentEntityExt">
+        <id column="DepartmentID" jdbcType="INTEGER" property="departmentid" />
+        <result column="Name" jdbcType="VARCHAR" property="name" />
+        <result column="Type" jdbcType="VARCHAR" property="type" />
+        <result column="Leader" jdbcType="VARCHAR" property="leader" />
+        <result column="OfficeAddress" jdbcType="VARCHAR" property="officeaddress" />
+        <result column="OfficeTelephone" jdbcType="VARCHAR" property="officetelephone" />
+        <result column="PostalCode" jdbcType="VARCHAR" property="postalcode" />
+        <result column="PostalAddress" jdbcType="VARCHAR" property="postaladdress" />
+        <result column="UserID" jdbcType="INTEGER" property="userid" />
+        <result column="MarkForDelete" jdbcType="BIT" property="markfordelete" />
+        <result column="Introduction" jdbcType="LONGVARCHAR" property="introduction" />
+    </resultMap>
+
+    <resultMap type="DepartmentEntityExt" id="DepartmentExtResultMap" extends="DepartmentExtBaseResultMap"></resultMap>
+
+    <sql id="DepartmentEntityBaseColumn">
+        _Department.DepartmentID,
+        _Department.Name,
+        _Department.Type,
+        _Department.Leader,
+        _Department.OfficeAddress,
+        _Department.OfficeTelephone,
+        _Department.PostalCode,
+        _Department.PostalAddress,
+        _Department.UserID,
+        _Department.MarkForDelete,
+        _Department.Introduction
+    </sql>
+
+    <select id="getDepartment" resultMap="DepartmentExtResultMap" parameterType="java.lang.Integer">
+        SELECT
+            <include refid="DepartmentEntityBaseColumn" />
+        FROM
+            Department AS _Department
+        WHERE
+            _Department.DepartmentID = #{departmentid}
+    </select>
+    
+    <select id="getDepartmentByUserID" resultMap="DepartmentExtResultMap" parameterType="java.lang.Integer">
+        SELECT
+            <include refid="DepartmentEntityBaseColumn" />
+        FROM
+            Department AS _Department
+        WHERE
+            _Department.UserID = #{userID}
+    </select>
+    
+    <insert id="saveDepartment" parameterType="departmentEntityExt">
+        <selectKey resultType="java.lang.Integer" keyProperty="departmentid" order="BEFORE">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+            Department (
+                Name,
+                Type,
+                Leader,
+                OfficeAddress,
+                OfficeTelephone,
+                PostalCode,
+                PostalAddress,
+                UserID,
+                MarkForDelete,
+                Introduction
+            ) VALUES (
+                #{name},
+                #{type},
+                #{leader},
+                #{officeaddress},
+                #{officetelephone},
+                #{postalcode},
+                #{postaladdress},
+                #{userid},
+                #{markfordelete},
+                #{introduction}
+            )
+    </insert>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.JobResponsibilityEntityMapperExt">
+    <resultMap id="JobResponsibilityExtBaseResultMap" type="JobResponsibilityEntityExt">
+        <id column="JOBRESPONSIBILITY_JOBRESPONSIBILITYID" property="jobresponsibilityid" />
+        <result column="JOBRESPONSIBILITY_JOBRECRUITID" property="jobrecruitid" />
+        <result column="JOBRESPONSIBILITY_MARKFORDELETE" property="markfordelete" />
+        <result column="JOBRESPONSIBILITY_DESCRIPTION" property="description" />
+    </resultMap>
+
+    <resultMap id="JobResponsibilityExtResultMap" type="JobResponsibilityEntityExt" extends="JobResponsibilityExtBaseResultMap">
+    </resultMap>
+
+    <sql id="JobResponsibilityBaseColumn">
+        _JobResponsibility.JobResponsibilityID AS JOBRESPONSIBILITY_JOBRESPONSIBILITYID,
+        _JobResponsibility.JobRecruitID AS JOBRESPONSIBILITY_JOBRECRUITID,
+        _JobResponsibility.MarkForDelete AS JOBRESPONSIBILITY_MARKFORDELETE,
+        _JobResponsibility.Description AS JOBRESPONSIBILITY_DESCRIPTION
+    </sql>
+    
+    <insert id="saveJobResponsibility" parameterType="JobResponsibilityEntityExt" >
+        <selectKey resultType="java.lang.Integer" keyProperty="jobresponsibilityid" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+            JobResponsibility (
+                JobRecruitID, 
+                MarkForDelete,
+                Description
+            ) VALUES (
+                #{jobrecruitid}, 
+                #{markfordelete},
+                #{description}
+            )
+    </insert>
+  
+    <update id="updateJobResponsibility" parameterType="JobResponsibilityEntityExt">
+        UPDATE
+            JobResponsibility
+        SET
+            JobRecruitID = #{jobrecruitid},
+            MarkForDelete = #{markfordelete},
+            Description = #{description}
+        WHERE
+            JobResponsibilityID = #{jobresponsibilityid}
+    </update>
+    
+    <update id="markForDeleteJobResponsibility" parameterType="JobResponsibilityEntityExt">
+        UPDATE
+            JobResponsibility
+        SET
+            MarkForDelete = true
+        WHERE
+            JobResponsibilityID = #{jobresponsibilityid}
+    </update>
+    
+    <delete id="deleteJobResponsibility" parameterType="java.lang.Integer">
+        DELETE FROM
+            JobResponsibility
+        WHERE
+            JobResponsibilityID = #{jobResponsibilityID}
+    </delete>
+  
+</mapper>

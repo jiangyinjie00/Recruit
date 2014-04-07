@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.UserEntityExt" alias="UserEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.UserInfoEntityExt" alias="UserInfoEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.EducationEntityExt" alias="EducationEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.ExperienceEntityExt" alias="ExperienceEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.JobResponsibilityEntityExt" alias="JobResponsibilityEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.JobRequireEntityExt" alias="JobRequireEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.JobRequestHistoryEntityExt" alias="JobRequestHistoryEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.JobRequestEntityExt" alias="JobRequestEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.JobRecruitEntityExt" alias="JobRecruitEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.JobEntityExt" alias="JobEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.StatusEntityExt" alias="StatusEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.DepartmentEntityExt" alias="DepartmentEntityExt"/>
+    </typeAliases>
+</configuration>

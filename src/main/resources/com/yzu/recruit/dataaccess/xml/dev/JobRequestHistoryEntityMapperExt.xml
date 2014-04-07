@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.JobRequestHistoryEntityMapperExt">
+    <resultMap id="JobRequestHistoryExtBaseResultMap" type="JobRequestHistoryEntityExt">
+        <id column="JOBREQUESTHISTORY_JobRequestHistoryID" property="jobrequesthistoryid"/>
+        <result column="JOBREQUESTHISTORY_OPERATIONDATE" property="operationdate"/>
+        <result column="JOBREQUESTHISTORY_OFFICERID" property="officerid"/>
+        <result column="JOBREQUESTHISTORY_OFFICERNAME" property="officername"/>
+        <result column="JOBREQUESTHISTORY_JOBREQUESTID" property="jobrequestid"/>
+        <result column="JOBREQUESTHISTORY_STATUSID" property="statusid"/>
+        <result column="JOBREQUESTHISTORY_REQUESTID" property="requestid"/>
+        <result column="JOBREQUESTHISTORY_OPINION" property="opinion"/>
+        <result column="JOBREQUESTHISTORY_TIMESTAMP" property="timestamp" />
+    </resultMap>
+    
+    <resultMap type="JobRequestHistoryEntityExt" id="JobRequestHistoryExtResultMap" extends="JobRequestHistoryExtBaseResultMap">
+        <association property="statusEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusResultMap"></association>
+    </resultMap>
+
+    <sql id="JobRequestHistoryBaseColumn">
+        _JobRequestHistory.JobRequestHistoryID AS JOBREQUESTHISTORY_JOBREQUESTHISTORYID,
+        _JobRequestHistory.OperationDate AS JOBREQUESTHISTORY_OPERATIONDATE,
+        _JobRequestHistory.OfficerID AS JOBREQUESTHISTORY_OFFICERID,
+        _JobRequestHistory.OfficerName AS JOBREQUESTHISTORY_OFFICERNAME,
+        _JobRequestHistory.JobRequestID AS JOBREQUESTHISTORY_JOBREQUESTID,
+        _JobRequestHistory.StatusID AS JOBREQUESTHISTORY_STATUSID,
+        _JobRequestHistory.Opinion AS JOBREQUESTHISTORY_OPINION,
+        _JobRequestHistory.Timestamp AS JOBREQUESTHISTORY_TIMESTAMP
+    </sql>
+
+    <select id="queryJobRequestHistorysByJobrequestid" resultMap="JobRequestHistoryExtResultMap" parameterType="java.lang.Integer">
+        SELECT
+            <include refid="JobRequestHistoryBaseColumn" />
+        FROM
+            JobRequestHistory AS _JobRequestHistory
+        WHERE
+            _JobRequestHistory.JobRequestID = #{jobrequestid}
+    </select>
+
+    <insert id="insertJobRequestHistory" parameterType="JobRequestHistoryEntityExt">
+        <selectKey resultType="java.lang.Integer" keyProperty="jobrequesthistoryid" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+            JobRequestHistory (
+                OperationDate,
+                OfficerID,
+                OfficerName,
+                JobRequestID,
+                StatusID,
+                Opinion
+            ) VALUES (
+                #{operationdate},
+                #{officerid},
+                #{officername},
+                #{jobrequestid},
+                #{statusid},
+                #{opinion}
+            )
+    </insert>
+
+    <delete id="deleteJobRequestHistory" parameterType="java.lang.Integer">
+    DELETE FROM
+        JobRequestHistory
+    WHERE
+        JobRequestHistoryID = #{jobRequestHistoryID}
+  </delete>
+</mapper>

@@ -1,0 +1,155 @@
+<div id="resume" class="maxwidth resume" ng-init="initResume()">
+    <div class="resume-width">
+    <div class="span3 resume-left">
+        <ul ng-init="activeTab = 0" class="nav bs-docs-sidenav">
+            <li ng-class="{active:activeTab == 0}" ng-click="activeTab = 0">
+                <a class="cursor-hand font-color-black">个人信息</a>
+            </li>
+            <li ng-class="{active:activeTab == 1}" ng-click="activeTab = 1">
+                <a class="cursor-hand font-color-black">教育经历</a>
+            </li>
+            <li ng-class="{active:activeTab == 2}" ng-click="activeTab = 2">
+                <a class="cursor-hand font-color-black">活动经历</a>
+            </li>
+        </ul>
+    </div>
+    <div class="right resume-right">
+        <div id="user-infomation" ng-show="activeTab == 0">
+            <form id="userInformation" name="userInformation">
+                <div class="row">
+                    <label>真实姓名：</label>
+                     <span class="span2"> 
+                        <input class="input-style" ng-model="information.realname" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>身份证号：</label> <span class="span2"> <input
+                       class="input-style" ng-model="information.cardid" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>性别：</label> <span class="span2"> <input
+                       class="input-style" ng-model="information.gender" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>民族：</label> <span class="span2"> <input
+                       class="input-style" ng-model="information.nation" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>政治面貌：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.politics" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>户籍所在地：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.hometown" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>通讯地址：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.postaladdress" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>通讯地址邮编：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.postalcode" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>婚姻状况：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.marrige" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>联系电话：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.phone" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>掌握外语及程度：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.foreignlanguage" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>计算机掌握程度：</label> <span class="span2"> <input
+                        class="input-style" ng-model="information.computerlevel" />
+                    </span>
+                </div>
+                <button ng-click="saveUserInfo()">保存并下一步</button>
+            </form>
+        </div>
+        <div id="user_education" ng-show="activeTab == 1">
+            <form id="userEducation" name="userEducation">
+                <div ng-repeat="education in educationList">
+                    <button ng-click=deleteEducation(education.num)>删除教育信息</button>
+                    <div class="row">
+                        <label>学位：</label> <span class="span2"> <input
+                           class="input-style" ng-model="education.degree" />
+                        </span>
+                    </div>
+                    <div class="row">
+                        <label>毕业时间：</label> <span class="span2"> <input
+                           class="input-style" ng-model="education.graduationdate" />
+                        </span>
+                    </div>
+                    <div class="row">
+                        <label>专业：</label> <span class="span2"> <input
+                          class="input-style"  ng-model="education.major" />
+                        </span>
+                    </div>
+                    <div class="row">
+                        <label>专业排名：</label> <span class="span2"> <input
+                           class="input-style" ng-model="education.majorranking" />
+                        </span>
+                    </div>
+                    <div class="row">
+                        <label>学院：</label> <span class="span2"> <input
+                           class="input-style" ng-model="education.academy" />
+                        </span>
+                    </div>
+                </div>
+                <button ng-click="addEducation()">添加教育信息</button>
+                <button ng-click="saveEducation()">保存并下一步</button>
+            </form>
+        </div>
+
+        <div id="user_Experience" ng-show="activeTab == 2">
+            <form id="userExperience" name="userExperience">
+                <div class="row">
+                    <label>实习经历：</label> <span class="span2"> <input
+                       class="input-style" ng-model="experience.practiceexperience" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>工作经历：</label> <span class="span2"> <input
+                       class="input-style" ng-model="experience.workexperience" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>成就：</label> <span class="span2"> <input
+                       class="input-style" ng-model="experience.achievement" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>奖项：</label> <span class="span2"> <input
+                       class="input-style" ng-model="experience.rewards" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>资格证书：</label> <span class="span2"> <input
+                       class="input-style" ng-model="experience.qualification" />
+                    </span>
+                </div>
+                <div class="row">
+                    <label>自我评价：</label> <span class="span2"> <input
+                       class="input-style" ng-model="experience.aboutme" />
+                    </span>
+                </div>
+                <button ng-click="saveExperience()">保存并下一步</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>

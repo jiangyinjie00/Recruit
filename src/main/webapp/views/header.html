@@ -1,0 +1,34 @@
+<div id="header" ng-controller="HeaderCtrl">
+  <div id="header-top">
+    <div class="maxwidth">
+      <a href="index.html" class="left" id="logo"> 
+        <img src="http://imgcache.qq.com/ac/www_tencent/hr/img/logo.png" />
+      </a>
+      <div id="header-info" class="right">
+        <span ng-show="currentUser.username">
+            您好！ {{currentUser.username}}
+            <a id="header-register" ng-click="logout()">退出</a>
+        </span>
+        <span ng-show="!currentUser.username">
+            <a href="#/login" id="header-login">登录</a> 
+            <a href="#/register" id="header-register">注册</a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div id="menus">
+    <div class="maxwidth">
+      <ul id="menu" class="left">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="">认识腾讯</a></li>
+        <li><a href="">人在腾讯</a></li>
+        <li ng-show="currentUser.roleID == 5"><a href="#/resume">个人简历</a></li>
+        <li ng-show="currentUser.roleID == 5"><a href="#/requests">申请表</a></li>
+        <li ng-show="currentUser.roleID == 4"><a href="#/backStage">后台系统</a></li>
+        <li ng-show="currentUser.roleID == 3"><a href="#/backStage">后台系统</a></li>
+        <li ng-show="currentUser.roleID == 2"><a href="#/backStage">后台系统</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>

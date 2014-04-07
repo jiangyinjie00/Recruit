@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt">
+    <resultMap id="StatusExtBaseResultMap" type="StatusEntityExt">
+        <id column="STATUS_STATUSID" property="statusid"/>
+        <result column="STATUS_NAME" property="name"/>
+        <result column="STATUS_DEFAULTINFOMATION" property="defaultinfomation"/>
+    </resultMap>
+
+    <resultMap type="StatusEntityExt" id="StatusResultMap" extends="StatusExtBaseResultMap"></resultMap>
+
+    <sql id="StatusBaseColumn">
+        _Status.StatusID AS STATUS_STATUSID,
+        _Status.Name AS STATUS_NAME,
+        _Status.DefaultInfomation AS STATUS_DEFAULTINFOMATION
+    </sql>
+
+    <select id="selectByStatusID" resultMap="StatusExtBaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+            <include refid="StatusBaseColumn" />
+        FROM
+            status AS _Status
+        WHERE
+            _Status.StatusID = #{statusid}
+    </select>
+
+    <insert id="insertStatus" parameterType="StatusEntityExt">
+        <selectKey resultType="java.lang.Integer" keyProperty="statusid" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into
+            status (
+                StatusID,
+                Name,
+                DefaultInfomation
+            ) values (
+                #{statusid},
+                #{name},
+                #{defaultinfomation}
+            )
+    </insert>
+
+    <update id="updateStatus" parameterType="StatusEntityExt">
+        update
+            status
+        set
+            Name = #{name},
+            DefaultInfomation = #{defaultinfomation}
+        where
+            StatusID = #{statusid}
+    </update>
+</mapper>

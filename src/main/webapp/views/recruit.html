@@ -1,0 +1,36 @@
+<div class="maxwidth" ng-init="init()">
+    <div class="box10">
+        <div class="blueline">
+            <div class="breadline">职位搜索</div>
+        </div>
+        <div id="recruit-search">
+            <input class="search" ng-model="searchItem.searchValue" type="text">
+            <button class="search-button" ng-click="search()">搜索</button>
+        </div>
+        <div id="search-condition">
+            <div id="city">
+                <a href="" ng-class="{searchActive: city==0}" ng-click="searchCity(0)"><span>全部</span></a>
+                <a href="" ng-class="{searchActive: city==1}" ng-click="searchCity(1)"><span>上海</span></a>
+                <a href="" ng-class="{searchActive: city==2}" ng-click="searchCity(2)"><span>扬州</span></a>
+                <a href="" ng-class="{searchActive: city==3}" ng-click="searchCity(3)"><span>常州</span></a>
+	        </div>
+	        <div id="type">
+                <a href="" ng-class="{searchActive: type==0}" ng-click="searchType(0)"><span>全部</span></a>
+                <a href="" ng-class="{searchActive: type==1}" ng-click="searchType(1)"><span>技术类</span></a>
+                <a href="" ng-class="{searchActive: type==2}" ng-click="searchType(2)"><span>市场类</span></a>
+                <a href="" ng-class="{searchActive: type==3}" ng-click="searchType(3)"><span>设计类</span></a>
+	        </div>
+        </div>
+
+        <div id="grid" class="gridStyle" ng-grid="gridOptions"></div>
+        <div>
+            <span id="no-records-span" class="span3" ng-show="!hasRecords">没有数据</span>
+        </div>
+
+        <div id="grid-footer" class="row-fluid grid-footer">
+            <span id="paginationInfo" class="pagination-info" ng-show="hasRecords"> </span>
+            <pagination boundary-links="true" num-pages="list.paging.pageCount" current-page="list.paging.currPage" max-size="3"></pagination>
+        </div>
+    </div>
+
+</div>

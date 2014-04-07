@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.JobRequestEntityMapperExt">
+    <resultMap id="JobRequestEntityExtBaseResultMap" type="JobRequestEntityExt">
+        <id column="JOBREQUEST_JOBREQUESTID" property="jobrequestid" />
+        <result column="JOBREQUEST_STATUSCHANGETIME" property="statuschangetime" />
+        <result column="JOBREQUEST_AUDITIONTIME" property="auditiontime" />
+        <result column="JOBREQUEST_AUDITIONRESPONDTIME" property="auditionrespondtime" />
+        <result column="JOBREQUEST_AUDITIONSCORE" property="auditionscore" />
+        <result column="JOBREQUEST_USERID" property="userid" />
+        <result column="JOBREQUEST_STATUSID" property="statusid" />
+        <result column="JOBREQUEST_JOBRECRUITID" property="jobrecruitid" />
+        <result column="JOBREQUEST_MARKFORDELETE" property="markfordelete" />
+        <result column="JOBREQUEST_REMARK" property="remark" />
+        <result column="JOBREQUEST_AUDITIONINFO" property="auditioninfo" />
+        <result column="JOBREQUEST_AUDITIONRESPOND" property="auditionrespond" />
+        <result column="JOBREQUEST_AUDITIONREMARK" property="auditionremark" />
+        <result column="JOBREQUEST_TIMESTAMP" property="timestamp" />
+    </resultMap>
+
+    <resultMap type="JobRequestEntityExt" id="JobRequestEntityExtResultMap" extends="JobRequestEntityExtBaseResultMap">
+        <association property="jobRecruitEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitExtResultMap"></association>
+        <association property="userEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserExtBaseResultMap"></association>
+        <association property="statusEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusResultMap"></association>
+        <association property="jobRequestHistoryEntityExts" resultMap="com.yzu.recruit.dataaccess.mapper.JobRequestHistoryEntityMapperExt.JobRequestHistoryExtResultMap"></association>
+    </resultMap>
+
+    <sql id="JobRequestBaseColumn">
+        _JobRequest.JobRequestID AS JOBREQUEST_JOBREQUESTID,
+        _JobRequest.StatusChangeTime AS JOBREQUEST_STATUSCHANGETIME,
+        _JobRequest.AuditionTime AS JOBREQUEST_AUDITIONTIME ,
+        _JobRequest.AuditionRespondTime AS JOBREQUEST_AUDITIONRESPONDTIME,
+        _JobRequest.AuditionScore AS JOBREQUEST_AUDITIONSCORE,
+        _JobRequest.UserID AS JOBREQUEST_USERID,
+        _JobRequest.StatusID AS JOBREQUEST_STATUSID,
+        _JobRequest.JobRecruitID AS JOBREQUEST_JOBRECRUIT,
+        _JobRequest.MarkForDelete AS JOBREQUEST_MARKFORDELETE,
+        _JobRequest.Remark AS JOBREQUEST_REMARK,
+        _JobRequest.AuditionInfo AS JOBREQUEST_AUDITIONINFO,
+        _JobRequest.AuditionRespond AS JOBREQUEST_AUDITIONRESPOND,
+        _JobRequest.AuditionRemark AS JOBREQUEST_AUDITIONREMARK
+    </sql>
+
+    <select id="selectJobRequestByID" resultMap="JobRequestEntityExtResultMap" parameterType="java.lang.Integer">
+        SELECT
+        <include refid="JobRequestBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRequestHistoryEntityMapperExt.JobRequestHistoryBaseColumn" />
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        LEFT JOIN JobRequestHistory AS _JobRequestHistory ON _JobRequest.JobRequestID = _JobRequestHistory.JobRequestID
+        WHERE _JobRequest.JobRequestID = #{jobRequestID}
+    </select>
+    
+    <select id="queryJobRequestByCriteria" resultMap="JobRequestEntityExtResultMap" parameterType="map">
+        SELECT
+        <include refid="JobRequestBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentEntityBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Department AS _Department On _Department.DepartmentID = _JobRecruit.DepartmentID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        WHERE _Status.StatusID = #{statusID}
+        <if test="departmentID !=0">
+            AND _JobRecruit.DepartmentID = #{departmentID}
+        </if>
+        <if test="departmentID ==0">
+            AND _JobRequest.AuditionTime IS NOT NULL
+        </if>
+        <if test="page != null">
+            LIMIT ${page.startRow}, ${page.pageSize}
+        </if>
+    </select>
+    
+    <select id="queryAllJobRequestByCriteria" resultType="java.lang.Integer" parameterType="map">
+        SELECT
+            COUNT(*)
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        WHERE _Status.StatusID = #{statusID}
+        <if test="departmentID !=0">
+            AND _JobRecruit.DepartmentID = #{departmentID}
+        </if>
+        <if test="departmentID ==0">
+            AND _JobRequest.AuditionTime IS NOT NULL
+        </if>
+    </select>
+    
+    <select id="queryAuditionJobRequest" resultMap="JobRequestEntityExtResultMap" parameterType="map">
+        SELECT
+        <include refid="JobRequestBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentEntityBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Department AS _Department On _Department.DepartmentID = _JobRecruit.DepartmentID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        WHERE _Status.StatusID = 2 AND _JobRequest.AuditionTime IS NULL
+        <if test="page != null">
+            LIMIT ${page.startRow}, ${page.pageSize}
+        </if>
+    </select>
+    
+    <select id="queryAllAuditionJobRequest" resultType="java.lang.Integer" parameterType="map">
+        SELECT
+            COUNT(*)
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        WHERE _Status.StatusID = 2 AND _JobRequest.AuditionTime IS NULL
+    </select>
+    
+    <select id="queryJobRequestByStatusName" resultMap="JobRequestEntityExtResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="JobRequestBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRequestHistoryEntityMapperExt.JobRequestHistoryBaseColumn" />
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        LEFT JOIN JobRequestHistory AS _JobRequestHistory ON _JobRequest.JobRequestID = _JobRequestHistory.JobRequestID
+        WHERE _Status.Name = #{statusName}
+    </select>
+    
+    <select id="queryJobRequestByDepartmentID" resultMap="JobRequestEntityExtResultMap">
+        SELECT
+        <include refid="JobRequestBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRequestHistoryEntityMapperExt.JobRequestHistoryBaseColumn" />
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        LEFT JOIN JobRequestHistory AS _JobRequestHistory ON _JobRequest.JobRequestID = _JobRequestHistory.JobRequestID
+        WHERE _Status.Name = #{statusName}
+        AND _JobRecruit.DepartmentID = #{departmentID}
+    </select>
+
+    <insert id="insertJobRequest" parameterType="JobRequestEntityExt">
+        <selectKey resultType="java.lang.Integer" keyProperty="jobrequestid" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        JobRequest (
+        StatusChangeTime,
+        AuditionTime,
+        AuditionRespondTime,
+        AuditionScore,
+        JobRecruitID,
+        UserID,
+        StatusID,
+        Remark,
+        AuditionInfo,
+        AuditionRespond,
+        AuditionRemark
+        ) VALUES (
+        #{statuschangetime},
+        #{auditiontime},
+        #{auditionrespondtime},
+        #{auditionscore},
+        #{jobrecruitid},
+        #{userid},
+        #{statusid},
+        #{remark},
+        #{auditioninfo},
+        #{auditionrespond},
+        #{auditionremark}
+        )
+    </insert>
+
+    <update id="updateJobRequest" parameterType="JobRequestEntityExt">
+        UPDATE
+        JobRequest
+        SET
+        StatusChangeTime = #{statuschangetime},
+        AuditionTime = #{auditiontime},
+        AuditionRespondTime = #{auditionrespondtime},
+        AuditionScore = #{auditionscore},
+        JobRecruitID = #{jobrecruitid},
+        UserID = #{userid},
+        StatusID = #{statusid},
+        Remark = #{remark},
+        AuditionInfo = #{auditioninfo},
+        AuditionRespond = #{auditionrespond},
+        AuditionRemark = #{auditionremark}
+        WHERE
+        JobRequestID = #{jobrequestid}
+    </update>
+    
+    <update id="updateJobRequestStatus" parameterType="map">
+        UPDATE
+        JobRequest AS _JobRequest
+        SET
+        _JobRequest.StatusChangeTime = #{statusChangeTime},
+        _JobRequest.StatusID = #{statusID}
+        WHERE
+        JobRequestID = #{jobRequestID}
+    </update>
+    
+    <update id="markForDeleteJobRequest" parameterType="JobRequestEntityExt">
+        UPDATE JobRequest SET
+        MarkForDelete = true
+        WHERE JobRequestID =
+        #{jobRequestiD}
+    </update>
+    
+    <update id="releaseAudition" parameterType="map">
+        UPDATE JobRequest AS _JobRequest
+        SET
+        _JobRequest.AuditionTime = #{auditionTime},
+        _JobRequest.AuditionInfo = #{auditionInfo}
+        WHERE _JobRequest.JobRequestID IN
+        <foreach close=")" collection="jobRequestIDs" item="requestID" open="(" separator=",">
+                    #{requestID}
+       </foreach>
+    </update>
+    
+    <delete id="deleteJobRequest" parameterType="java.lang.Integer">
+        DELETE FROM
+            JobRequest
+        WHERE
+            JobRequestID = #{jobRequestID}
+  </delete>
+</mapper>

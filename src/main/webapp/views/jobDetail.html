@@ -1,0 +1,43 @@
+<div id="position_detail" class="maxwidth" ng-init="init()">
+    <div class="box wcont_a">
+        <div class="blueline">
+            <div class="butzwss left"></div>
+            <div class="clr"></div>
+        </div>
+        <table class="tablelist textl" cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr class="h">
+                    <td colspan="3" class="l2 bold size16" id="sharetitle">{{jobRecruit.jobEntityExt.name}}</td>
+                </tr>
+                <tr class="c bottomline">
+                    <td><span class="lightblue l2">工作地点：</span>{{jobRecruit.city}}</td>
+                    <td><span class="lightblue">职位类别：</span>{{jobRecruit.type}}</td>
+                    <td><span class="lightblue">招聘人数:</span>{{jobRecruit.person}}</td>
+                </tr>
+                <tr class="c">
+                    <td colspan="3" class="l2">
+                        <div class="lightblue">工作职责:</div>
+                        <ul class="squareli">
+                            <li ng-repeat="jobRequire in jobRecruit.jobRequireEntityExts">{{jobRequire.description}}</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="c">
+                    <td colspan="3" class="l2">
+                        <div class="lightblue">工作要求:</div>
+                        <ul class="squareli">
+                            <li ng-repeat="jobResponsibility in jobRecruit.jobResponsibilityEntityExts">{{jobResponsibility.description}}</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="c">
+                    <td colspan="3" class="l2">
+                        <div class="lightblue">
+                            <button class="request-button" ng-click=jobRequest()>申请岗位</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

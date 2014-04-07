@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt">
+    <resultMap id="UserExtBaseResultMap" type="UserEntityExt">
+        <id column="USER_USERID" property="userid" jdbcType="INTEGER" />
+        <result column="USER_NAME" property="name" jdbcType="VARCHAR" />
+        <result column="USER_PASSWORD" property="password" jdbcType="VARCHAR" />
+        <result column="USER_LASTLOGINDATE" property="lastlogindate" jdbcType="TIMESTAMP" />
+        <result column="USER_REGISTERDATE" property="registerdate" jdbcType="TIMESTAMP" />
+        <result column="USER_ROLEID" property="roleid" jdbcType="INTEGER" />
+        <result column="USER_MARKFORDELETE" property="markfordelete" jdbcType="BIT" />
+    </resultMap>
+
+    <resultMap type="UserEntityExt" id="UserExtResultMap" extends="UserExtBaseResultMap">
+        <association property="userInfoEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.UserInfoEntityMapperExt.UserInfoExtResultMap"></association>
+        <association property="educationEntityExtList" resultMap="com.yzu.recruit.dataaccess.mapper.EducationEntityMapperExt.EducationExtResultMap"></association>
+        <association property="experienceEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.ExperienceEntityMapperExt.ExperienceExtResultMap"></association>
+    </resultMap>
+
+    <sql id="UserBaseColumn">
+        _User.userID AS USER_USERID,
+        _User.Name AS USER_NAME,
+        _User.Password AS USER_PASSWORD,
+        _User.LastLoginDate AS USER_LASTLOGINDATE,
+        _User.RegisterDate AS USER_REGISTERDATE,
+        _User.RoleID AS USER_ROLEID,
+        _User.MarkForDelete AS USER_MARKFORDELETE
+    </sql>
+
+    <sql id="UserInfoBaseColumn">
+        _UserInfo.UserInfoID AS USERINFO_USERINFOID,
+        _UserInfo.RealName AS USERINFO_REALNAME,
+        _UserInfo.CardID AS USERINFO_CARDID,
+        _UserInfo.Gender AS USERINFO_GENDER,
+        _UserInfo.Nation AS
+        USERINFO_NATION,
+        _UserInfo.Politics AS USERINFO_POLITICS,
+        _UserInfo.Hometown AS
+        USERINFO_HOMETOWN,
+        _UserInfo.PostalAddress AS USERINFO_POSTALADDRESS,
+        _UserInfo.PostalCode AS
+        USERINFO_POSTALCODE,
+        _UserInfo.Photo AS USERINFO_PHOTO,
+        _UserInfo.PhotoID AS USERINFO_PHOTOID,
+        _UserInfo.Marrige AS USERINFO_MARRIGE,
+        _UserInfo.Phone AS USERINFO_PHONE,
+        _UserInfo.ForeignLanguage AS USERINFO_FOREIGNLANGUAGE,
+        _UserInfo.ComputerLevel AS
+        USERINFO_COMPUTERLEVEL,
+        _UserInfo.UserID AS USERINFO_USERID
+    </sql>
+
+    <select id="getBaseUserByID" parameterType="java.lang.String" resultMap="UserExtBaseResultMap">
+        SELECT
+        <include refid="UserBaseColumn" />
+        FROM User AS _User
+        LEFT JOIN UserInfo AS _UserInfo ON _User.UserID = _UserInfo.UserID
+        WHERE
+        _User.UserID = #{userID}
+    </select>
+
+    <select id="getBaseUserByName" parameterType="java.lang.String" resultMap="UserExtBaseResultMap">
+        SELECT
+        <include refid="UserBaseColumn" />
+        FROM User AS _User
+        WHERE
+        _User.Name = #{userName}
+    </select>
+
+    <insert id="insertUserEntity" parameterType="UserEntityExt">
+        <selectKey keyProperty="userid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO User (Name, Password, LastLoginDate, RegisterDate, RoleID)
+        VALUES
+        (#{name,
+        jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR}, #{lastlogindate,
+        jdbcType=TIMESTAMP},
+        #{registerdate, jdbcType=TIMESTAMP}, #{roleid, jdbcType=INTEGER}
+        )
+    </insert>
+    
+    <select id="getUserByID" parameterType="java.lang.Integer" resultMap="UserExtResultMap">
+        SELECT 
+        <include refid="UserBaseColumn"/>,
+        <include refid="UserInfoBaseColumn"/>,
+        <include refid="com.yzu.recruit.dataaccess.mapper.EducationEntityMapperExt.EducationBaseColumn"/>,
+        <include refid="com.yzu.recruit.dataaccess.mapper.ExperienceEntityMapperExt.ExperienceBaseColumn"/>
+        
+        FROM User AS _User 
+        LEFT JOIN UserInfo AS _UserInfo ON _User.UserID = _UserInfo.UserID
+        LEFT JOIN Experience AS _Experience ON _User.UserID = _Experience.UserID
+        LEFT JOIN Education AS _Education On _User.UserID = _Education.UserID
+        WHERE _User.UserID  = #{userID} AND _Education.MarkForDelete = false
+        ORDER BY _Education.Num
+    </select>
+    
+    <delete id="deleteUserEntityExt" parameterType="java.lang.Integer">
+        DELETE FROM
+            User
+        WHERE
+            UserID = #{userID}
+  </delete>
+</mapper>

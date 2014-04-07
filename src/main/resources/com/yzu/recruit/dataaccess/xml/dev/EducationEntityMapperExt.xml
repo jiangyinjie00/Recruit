@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.EducationEntityMapperExt">
+    <resultMap id="EducationExtBaseResultMap" type="EducationEntityExt">
+        <id column="EDUCATION_EDUCATIONID" property="educationid" jdbcType="INTEGER" />
+        <result column="EDUCATION_DEGREE" property="degree" jdbcType="VARCHAR" />
+        <result column="EDUCATION_GRADUATIONDATE" property="graduationdate" jdbcType="TIMESTAMP" />
+        <result column="EDUCATION_MAJOR" property="major" jdbcType="VARCHAR" />
+        <result column="EDUCATION_MAJORRANKING" property="majorranking" jdbcType="VARCHAR" />
+        <result column="EDUCATION_ACADEMY" property="academy" jdbcType="VARCHAR" />
+        <result column="EDUCATION_USERID" property="userid" jdbcType="INTEGER" />
+        <result column="EDUCATION_MARKFORDELETE" property="markfordelete" jdbcType="INTEGER" />
+        <result column="EDUCATION_NUM" property="num" jdbcType="INTEGER" />
+    </resultMap>
+
+    <resultMap type="EducationEntityExt" id="EducationExtResultMap" extends="EducationExtBaseResultMap">
+    </resultMap>
+
+    <sql id="EducationBaseColumn">
+        _Education.EducationID AS EDUCATION_EDUCATIONID,
+        _Education.Degree AS EDUCATION_DEGREE,
+        _Education.GraduationDate
+        AS EDUCATION_GRADUATIONDATE,
+        _Education.Major AS EDUCATION_MAJOR,
+        _Education.MajorRanking
+        AS EDUCATION_MAJORRANKING,
+        _Education.Academy AS EDUCATION_ACADEMY,
+        _Education.UserID AS
+        EDUCATION_USERID,
+        _Education.MarkForDelete AS
+        EDUCATION_MARKFORDELETE,
+        _Education.Num AS EDUCATION_NUM
+    </sql>
+
+    <insert id="insertEducation" parameterType="EducationEntityExt">
+        <selectKey keyProperty="educationid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO Education (Degree, GraduationDate, Major,
+        MajorRanking,
+        Academy, UserID, Num)
+        VALUES (#{degree},
+        #{graduationdate}, #{major}, #{majorranking}, #{academy},
+        #{userid}, #{num})
+    </insert>
+
+    <update id="updateEducation" parameterType="EducationEntityExt">
+        UPDATE Education
+        SET
+        Degree = #{degree},
+        GraduationDate =
+        #{graduationdate},
+        Major = #{major},
+        MajorRanking = #{majorranking},
+        Academy = #{academy},
+        Num =
+        #{num}
+        WHERE
+        EducationID = #{educationid}
+    </update>
+
+    <update id="deleteEducation" parameterType="java.lang.Integer">
+        UPDATE Education SET
+        MarkForDelete = true
+        WHERE EducationID =
+        #{educationid}
+    </update>
+    
+    <update id="markForDeleteEducation" parameterType="EducationEntityExt">
+        UPDATE Education SET
+        MarkForDelete = true
+        WHERE EducationID =
+        #{educationid}
+    </update>
+</mapper>

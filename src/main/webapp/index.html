@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="recruitApp">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>Recruit</title>
+<link rel="stylesheet" href="styles/app.css" />
+<link rel="stylesheet" href="styles/bootstrap-datepicker.css"/>
+<link rel="stylesheet" href="styles/bootstrap-timepicker.css"/>
+<link rel="stylesheet" href="styles/ng-grid.css" />
+<link rel="stylesheet" href="styles/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/css/awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="styles/css/awesome/css/all.css">
+<link rel="stylesheet" href="styles/css/awesome/css/thickbox.css">
+<script src="scripts/plugin/jquery-1.9.1.js"></script>
+<script src="scripts/plugin/select2.js"></script>
+<script src="scripts/plugin/bootstrap-datepicker.js"></script>
+<script src="scripts/plugin/bootstrap-timepicker.js"></script>
+<script src="scripts/common/CommonUtil.js"></script>
+<script src="scripts/common/Constant.js"></script>
+<script src="scripts/angular/angular.js"></script>
+<script src="scripts/angular/angular-resource.js"></script>
+<script src="scripts/app.js"></script>
+
+<script src="scripts/controllers/BaseCtrl.js"></script>
+<script src="scripts/controllers/HeaderCtrl.js"></script>
+<script src="scripts/controllers/HomeCtrl.js"></script>
+<script src="scripts/controllers/RegCtrl.js"></script>
+<script src="scripts/controllers/LoginCtrl.js"></script>
+<script src="scripts/controllers/JobDetailCtrl.js"></script>
+<script src="scripts/controllers/ResumeCtrl.js"></script>
+<script src="scripts/controllers/RecruitCtrl.js"></script>
+<script src="scripts/controllers/BackStageCtrl.js"></script>
+<script src="scripts/controllers/AuditionCtrl.js"></script>
+<script src="scripts/controllers/RequestCtrl.js"></script>
+
+<script src="scripts/directives/validation.js"></script>
+<script src="scripts/directives/ng-grid.js"></script>
+<script src="scripts/directives/pagination.js"></script>
+<script src="scripts/directives/datepicker.js"></script>
+<script src="scripts/directives/timepicker.js"></script>
+<script src="scripts/services/ResourceService.js"></script>
+<script src="scripts/services/AccountService.js"></script>
+<script src="scripts/services/DialogService.js"></script>
+<script src="scripts/services/dialog.js"></script>
+<script src="scripts/services/transition.js"></script>
+
+
+</head>
+<body>
+  <div ng-include="'views/header.html'"></div>
+  <div ng-view></div>
+</body>
+</html>

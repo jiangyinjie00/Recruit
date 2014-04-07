@@ -1,0 +1,52 @@
+<div class="maxwidth" ng-init="initRequest()">
+    <div>
+        <div class="row">
+            <label>申请人：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.userEntityExt.name" readonly />
+            </span>
+        </div>
+        <div class="row">
+            <label>申请职位：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.jobRecruitEntityExt.jobEntityExt.name" readonly />
+            </span>
+        </div>
+        <div class="row">
+            <label>工作地点：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.jobRecruitEntityExt.city" readonly />
+            </span>
+        </div>
+        <div class="row">
+            <label>当前状态：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.statusEntityExt.defaultinfomation" readonly />
+            </span>
+        </div>
+        <div class="row">
+            <label>状态改变时间：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.statuschangetime" readonly />
+            </span>
+        </div>
+        <div class="row" ng-show="currentUser.roleid != 5">
+            <label>操作批示：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="opinion" />
+            </span>
+            <button ng-click="operationRequest(true)">通过</button>
+            <button ng-click="operationRequest(false)">拒绝</button>
+        </div>
+    </div>
+    
+    <div>
+        <ul>
+            <li ng-repeat="history in jobRequest.jobRequestHistoryEntityExts">
+                <span>操作人: {{history.officername}}       操作时间: {{history.operationdate}}</span>
+                <span>状态: {{history.statusEntityExt.defaultinfomation}}       操作内容: {{history.operation}}</span>
+            </li>
+        </ul>
+    </div>
+    
+</div>

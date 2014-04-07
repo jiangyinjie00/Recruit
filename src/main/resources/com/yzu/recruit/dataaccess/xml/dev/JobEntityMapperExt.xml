@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt">
+    <resultMap id="JobExtBaseResultMap" type="JobEntityExt">
+        <id column="JOB_JOBID" property="jobid"/>
+        <result column="JOB_NAME" property="name"/>
+        <result column="JOB_INTRODUCE" property="introduce"/>
+    </resultMap>
+
+    <resultMap type="JobEntityExt" id="JobExtResultMap" extends="JobExtBaseResultMap">
+    
+    </resultMap>
+    
+    <sql id="JobBaseColumn">
+        _Job.JobID AS JOB_JOBID,
+        _Job.Name AS JOB_NAME,
+        _Job.Introduce AS JOB_INTRODUCE
+    </sql>
+
+    <select id="getJobByID" resultMap="JobExtResultMap" parameterType="java.lang.Integer">
+        SELECT
+            <include refid="JobBaseColumn" />
+        FROM
+            Job AS _Job
+        WHERE
+            _Job.JobID = #{jobid}
+    </select>
+    
+    <select id="findAllJobs" resultMap="JobExtResultMap">
+        SELECT
+            <include refid="JobBaseColumn" />
+        FROM
+            Job AS _Job
+    </select>
+
+    <insert id="saveJob" parameterType="JobEntityExt">
+        <selectKey resultType="java.lang.Integer" keyProperty="jobid" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+            Job (
+                Name,
+                Introduce
+            ) VALUES (
+                #{name},
+                #{introduce}
+            )
+    </insert>
+
+    <update id="updateByJobID" parameterType="JobEntityExt">
+        UPDATE
+            Job AS _Job
+        SET
+            _Job.Name = #{name},
+            _Job.Introduce = #{introduce}
+        WHERE
+            _Job.JobID = #{jobid}
+    </update>
+    
+    <delete id="deleteJob" parameterType="java.lang.Integer">
+        DELETE FROM
+            Job
+        WHERE
+            JobID = #{jobID}
+    </delete>
+</mapper>

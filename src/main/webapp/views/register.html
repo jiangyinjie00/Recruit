@@ -1,0 +1,74 @@
+<div id="register" class="maxwidth">
+    <div class="box10">
+        <div class="blueline">
+            <div class="breadline">用户注册</div>
+        </div>
+        <div id="regdiv">
+            <form id="userForm" name="userForm" class="user-register-form">
+                <div class="row">
+                    <label>
+                        <span class="red">*</span>
+                        用户名：
+                    </label>
+                    <span class="span2">
+                        <input id="name" name="name" ng-model="user.name" type="text" recruit-required ng-pattern ="/^.{3,16}$/">
+                    </span>
+                    <span class="validation-span validation-ok" ng-show="userForm.name.$dirty && userForm.name.$valid">
+                        <i class="icon-ok-sign"></i>
+                    </span>
+                    <span class="validation-span validation-error" ng-show="userForm.name.$dirty && userForm.name.$invalid">
+                        <i class="icon-remove-sign"></i>
+                    </span>
+                </div>
+                <div class="error-message-row">
+                    <span ng-show="userForm.name.requiredError">请填写用户名</span>
+                    <span ng-show="userForm.name.$error.pattern">请输入3-16个字符</span>
+                </div>
+                <div class="row">
+                    <label>
+                        <span class="red">*</span>
+                        密码：
+                    </label>
+                    <span class="span2">
+                        <input id="password" name="password" ng-model="user.password" type="password" recruit-password>
+                    </span>
+                    <span class="validation-span validation-ok" ng-show="userForm.password.$dirty && userForm.password.$valid">
+                        <i class="icon-ok-sign"></i>
+                    </span>
+                    <span class="validation-span validation-error" ng-show="userForm.password.$dirty && userForm.password.$invalid">
+                        <i class="icon-remove-sign"></i>
+                    </span>
+                </div>
+                <div class="error-message-row">
+                    <span ng-show="userForm.password.requiredError">密码不能为空</span>
+                </div>
+                <div class="row">
+                    <label>
+                        <span class="red">*</span>
+                        确认密码：
+                    </label>
+                    <span class="span2">
+                        <input id="confirmPassword" name="confirmPassword" ng-model="confirmPassword" type="password" recruit-password-confirm>
+                    </span> 
+                    <span class="validation-span validation-ok" ng-show="userForm.confirmPassword.$dirty && userForm.confirmPassword.$valid">
+                        <i class="icon-ok-sign"></i>
+                    </span>
+                    <span class="validation-span validation-error" ng-show="userForm.confirmPassword.$dirty && userForm.confirmPassword.$invalid">
+                        <i class="icon-remove-sign"></i>
+                    </span>   
+                </div>
+                <div class="error-message-row">
+                    <span ng-show="userForm.confirmPassword.$dirty && userForm.confirmPassword.$error.required" class="error-message-info">
+                         请再次输入密码
+                    </span>
+                    <span ng-show="userForm.confirmPassword.$dirty && userForm.confirmPassword.$error['matched']" class="error-message-info">
+                        两次密码不匹配
+                    </span>
+                </div>
+                <div class="submit">
+                    <button ng-click="register(userForm.$invalid)">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

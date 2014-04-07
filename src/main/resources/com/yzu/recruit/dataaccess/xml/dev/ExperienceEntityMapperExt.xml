@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yzu.recruit.dataaccess.mapper.ExperienceEntityMapperExt">
+    <resultMap id="ExperienceExtBaseResultMap" type="ExperienceEntityExt">
+        <id column="EXPERIENCE_EXPERIENCEID" property="experienceid" jdbcType="INTEGER" />
+        <result column="EXPERIENCE_USERID" property="userid" jdbcType="INTEGER" />
+        <result column="EXPERIENCE_MARKFORDELETE" property="markfordelete" jdbcType="BIT" />
+        <result column="EXPERIENCE_PRACTICEEXPERIENCE" property="practiceexperience" jdbcType="VARCHAR" />
+        <result column="EXPERIENCE_WORKEXPERIENCE" property="workexperience" jdbcType="VARCHAR" />
+        <result column="EXPERIENCE_ACHIEVEMENT" property="achievement" jdbcType="VARCHAR" />
+        <result column="EXPERIENCE_REWARDS" property="rewards" jdbcType="VARCHAR" />
+        <result column="EXPERIENCE_QUALIFICATION" property="qualification" jdbcType="VARCHAR" />
+        <result column="EXPERIENCE_ABOUTME" property="aboutme" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap type="ExperienceEntityExt" id="ExperienceExtResultMap" extends="ExperienceExtBaseResultMap">
+    </resultMap>
+
+    <sql id="ExperienceBaseColumn">
+        _Experience.ExperienceID AS EXPERIENCE_EXPERIENCEID,
+        _Experience.UserID AS
+        EXPERIENCE_USERID,
+        _Experience.MarkForDelete AS EXPERIENCE_MARKFORDELETE,
+        _Experience.PracticeExperience AS EXPERIENCE_PRACTICEEXPERIENCE,
+        _Experience.WorkExperience AS
+        EXPERIENCE_WORKEXPERIENCE,
+        _Experience.Achievement AS EXPERIENCE_ACHIEVEMENT,
+        _Experience.Rewards AS EXPERIENCE_REWARDS,
+        _Experience.Qualification AS
+        EXPERIENCE_QUALIFICATION,
+        _Experience.AboutMe AS EXPERIENCE_ABOUTME
+    </sql>
+    <select id="getExperienceByID" resultMap="ExperienceExtResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="ExperienceBaseColumn" />
+        FROM Experience AS _Experience
+        WHERE _Experience.ExperienceID =
+        #{experienceid,jdbcType=INTEGER}
+    </select>
+    
+    <select id="getExperienceByUserID" resultMap="ExperienceExtResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="ExperienceBaseColumn" />
+        FROM Experience AS _Experience
+        WHERE _Experience.ExperienceID =
+        #{userID,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByExperienceID" parameterType="java.lang.Integer">
+        DELETE FROM Experience AS _Experience
+        WHERE _Experience.ExperienceID = #{experienceid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insertExperience" parameterType="ExperienceEntityExt">
+        <selectKey keyProperty="experienceid" order="AFTER" resultType="java.lang.Integer">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into Experience ( UserID,
+        PracticeExperience, WorkExperience,
+        Achievement, Rewards, Qualification,
+        AboutMe)
+        values (#{userid,jdbcType=INTEGER},
+        #{practiceexperience,jdbcType=VARCHAR},
+        #{workexperience,jdbcType=VARCHAR},
+        #{achievement,jdbcType=VARCHAR},
+        #{rewards,jdbcType=VARCHAR},
+        #{qualification,jdbcType=VARCHAR},
+        #{aboutme,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateExperience" parameterType="ExperienceEntityExt">
+        UPDATE Experience
+        SET
+        UserID = #{userid,jdbcType=INTEGER},
+        MarkForDelete = #{markfordelete,jdbcType=BIT},
+        PracticeExperience = #{practiceexperience,jdbcType=VARCHAR},
+        WorkExperience = #{workexperience,jdbcType=VARCHAR},
+        Achievement = #{achievement,jdbcType=VARCHAR},
+        Rewards = #{rewards,jdbcType=VARCHAR},
+        Qualification = #{qualification,jdbcType=VARCHAR},
+        AboutMe = #{aboutme,jdbcType=VARCHAR}
+        WHERE
+        ExperienceID = #{experienceid,jdbcType=INTEGER}
+    </update>
+</mapper>
