@@ -214,6 +214,7 @@ CREATE  TABLE IF NOT EXISTS `Recruit`.`JobRequest` (
   `MarkForDelete` TINYINT(1) NULL DEFAULT false ,
   `JobRecruitID` INT(11) NOT NULL ,
   `Timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+  `CreateTime` DATETIME NULL DEFAULT NULL ,
   PRIMARY KEY (`JobRequestID`) ,
   INDEX `fk_JobDemand_User1_idx` (`UserID` ASC) ,
   INDEX `fk_JobDemand_Status1_idx` (`StatusID` ASC) ,

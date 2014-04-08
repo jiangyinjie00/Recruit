@@ -16,6 +16,7 @@
         <result column="JOBREQUEST_AUDITIONRESPOND" property="auditionrespond" />
         <result column="JOBREQUEST_AUDITIONREMARK" property="auditionremark" />
         <result column="JOBREQUEST_TIMESTAMP" property="timestamp" />
+        <result column="JOBREQUEST_CREATETIME" property="createtime" />
     </resultMap>
 
     <resultMap type="JobRequestEntityExt" id="JobRequestEntityExtResultMap" extends="JobRequestEntityExtBaseResultMap">
@@ -38,7 +39,8 @@
         _JobRequest.Remark AS JOBREQUEST_REMARK,
         _JobRequest.AuditionInfo AS JOBREQUEST_AUDITIONINFO,
         _JobRequest.AuditionRespond AS JOBREQUEST_AUDITIONRESPOND,
-        _JobRequest.AuditionRemark AS JOBREQUEST_AUDITIONREMARK
+        _JobRequest.AuditionRemark AS JOBREQUEST_AUDITIONREMARK,
+        _JobRequest.CreateTime AS JOBREQUEST_CREATETIME
     </sql>
 
     <select id="selectJobRequestByID" resultMap="JobRequestEntityExtResultMap" parameterType="java.lang.Integer">
@@ -54,9 +56,8 @@
         LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
         LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
         LEFT JOIN JobRequestHistory AS _JobRequestHistory ON _JobRequest.JobRequestID = _JobRequestHistory.JobRequestID
-        LEFT JOIN Status As _Status1 ON _Status1.StatusID = _JobRequestHistory.StatusID
+        LEFT JOIN Status As _Status ON _Status.StatusID = _JobRequestHistory.StatusID
         WHERE _JobRequest.JobRequestID = #{jobRequestID}
     </select>
     
