@@ -130,5 +130,16 @@ public class JobRequestServiceImpl implements JobRequestService {
 
     }
 
+    @Override
+    public List<JobRequestEntityExt> queryOwnJobRequests(int userID, Pagination pagination) {
+        return jobRequestEntityMapperExt.queryOwnJobRequests(userID, pagination);
+    }
+
+    @Override
+    public int queryAllOwnJobRequests(int userID) {
+        return jobRequestEntityMapperExt.queryAllOwnJobRequests(userID);
+    }
+
+
 
 }

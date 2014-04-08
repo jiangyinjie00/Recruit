@@ -36,4 +36,8 @@ public interface JobRequestEntityMapperExt extends JobRequestEntityMapper {
     void updateJobRequestStatus(@Param("jobRequestID")int jobRequestID, @Param("statusChangeTime")Date statusChangeTime, @Param("statusID")  int statusID);
 
     void releaseAudition(@Param("auditionInfo")String auditionInfo, @Param("auditionTime")String auditionTime, @Param("jobRequestIDs")int[] jobRequestArrary);
+
+    List<JobRequestEntityExt> queryOwnJobRequests(@Param("userID")int userID, @Param("page")Pagination pagination);
+
+    int queryAllOwnJobRequests(@Param("userID")int userID);
 }

@@ -103,6 +103,28 @@ public class JobRequestController {
 
     }
 
+    @RequestMapping(value = "/job/ownJobRequests", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    JsonResponse<PageDataModel<JobRequestEntityExt>> getOwnJobRequests(HttpServletRequest request,
+            HttpServletResponse response, @RequestBody RequestQueryVo requestQueryVo) {
+        HttpSession session = request.getSession();
+        UserModel userModel = (UserModel) session.getAttribute("USER");
+        int userID = userModel.getUserID();
+        Pagination pagination = CriteriaConverter.toPagination(requestQueryVo.getPageModel());
+
+        List<JobRequestEntityExt> list = jobRequestService.queryOwnJobRequests(userID, pagination);
+        int count = jobRequestService.queryAllOwnJobRequests(userID);
+
+        PageModel pageModel = requestQueryVo.getPageModel();
+        pageModel.setRowCount(count);
+
+        PageDataModel<JobRequestEntityExt> pageDataModel = new PageDataModel<JobRequestEntityExt>();
+        pageDataModel.setData(list);
+        pageDataModel.setPaging(pageModel);
+        return new JsonResponse<PageDataModel<JobRequestEntityExt>>(Constant.STATUS_SUCCESS, pageDataModel);
+
+    }
+
     @RequestMapping(value = "/job/requestDetail/{jobRequestID}", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     JsonResponse<JobRequestEntityExt> getRequestByID(HttpServletRequest request,

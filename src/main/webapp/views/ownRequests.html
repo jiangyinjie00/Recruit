@@ -1,0 +1,13 @@
+<div class="maxwidth" ng-init="initOwnRequests()">
+
+     <div id="grid" class="gridStyle" ng-grid="gridOptions"></div>
+     <div>
+         <span id="no-records-span" class="span3" ng-show="!hasRecords">没有数据</span>
+     </div>
+
+     <div id="grid-footer" class="row-fluid grid-footer">
+         <span id="paginationInfo" class="pagination-info" ng-show="hasRecords"> </span>
+         <pagination boundary-links="true" num-pages="list.paging.pageCount" current-page="list.paging.currPage" max-size="3"></pagination>
+     </div>
+     
+</div>

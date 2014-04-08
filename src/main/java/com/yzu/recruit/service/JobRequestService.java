@@ -28,4 +28,9 @@ public interface JobRequestService {
     JobRequestEntityExt getJobRequestByID(int jobRequestID);
 
     void releaseAudition(String auditionInfo, String auditionTime, int[] jobRequestArrary);
+
+    List<JobRequestEntityExt> queryOwnJobRequests(int userID, Pagination pagination);
+
+    int queryAllOwnJobRequests(int userID);
+
 }

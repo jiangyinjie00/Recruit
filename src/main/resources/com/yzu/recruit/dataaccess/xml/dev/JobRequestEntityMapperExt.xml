@@ -56,6 +56,7 @@
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
         LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
         LEFT JOIN JobRequestHistory AS _JobRequestHistory ON _JobRequest.JobRequestID = _JobRequestHistory.JobRequestID
+        LEFT JOIN Status As _Status1 ON _Status1.StatusID = _JobRequestHistory.StatusID
         WHERE _JobRequest.JobRequestID = #{jobRequestID}
     </select>
     
@@ -135,6 +136,39 @@
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
         LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
         WHERE _Status.StatusID = 2 AND _JobRequest.AuditionTime IS NULL
+    </select>
+    
+    <select id="queryOwnJobRequests" resultMap="JobRequestEntityExtResultMap" parameterType="map">
+        SELECT
+        <include refid="JobRequestBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentEntityBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Department AS _Department On _Department.DepartmentID = _JobRecruit.DepartmentID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        WHERE _JobRequest.UserID = #{userID}
+        <if test="page != null">
+            LIMIT ${page.startRow}, ${page.pageSize}
+        </if>
+    </select>
+    
+    <select id="queryAllOwnJobRequests" resultType="java.lang.Integer" parameterType="map">
+        SELECT
+            COUNT(*)
+        FROM
+        JobRequest AS _JobRequest
+        LEFT JOIN User AS _User ON _JobRequest.UserID = _User.UserID
+        LEFT JOIN JobRecruit AS _JobRecruit ON _JobRecruit.JobRecruitID = _JobRequest.JobRecruitID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        LEFT JOIN Status AS _Status ON _JobRequest.StatusID = _Status.StatusID
+        WHERE _JobRequest.UserID = #{userID}
     </select>
     
     <select id="queryJobRequestByStatusName" resultMap="JobRequestEntityExtResultMap" parameterType="java.lang.String">

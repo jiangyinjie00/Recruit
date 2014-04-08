@@ -38,7 +38,10 @@ angular.module('recruitApp').config([ '$routeProvider', '$httpProvider', functio
 	}).when('/audition', {
 		templateUrl : 'views/audition.html',
 		controller : 'AuditionCtrl'
-	});
+	}).when('/ownRequests', {
+	templateUrl : 'views/ownRequests.html',
+	controller : 'RequestCtrl'
+});
     
     $httpProvider.responseInterceptors.push([ '$rootScope', '$q', '$location', function($rootScope, $q, $location) {
         return function(promise) {
