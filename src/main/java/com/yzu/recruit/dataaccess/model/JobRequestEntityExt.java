@@ -16,6 +16,7 @@ public class JobRequestEntityExt extends JobRequestEntity {
     private String statusChangeTimeFormat;
     private String auditionTimeFormat;
     private String auditionRespondTimeFormat;
+    private String createTimeFormat;
 
     public List<JobRequestHistoryEntityExt> getJobRequestHistoryEntityExts() {
         return jobRequestHistoryEntityExts;
@@ -104,4 +105,13 @@ public class JobRequestEntityExt extends JobRequestEntity {
     public void setAuditionRespondTimeFormat(String auditionRespondTimeFormat) {
         this.auditionRespondTimeFormat = auditionRespondTimeFormat;
     }
+
+    public String getCreateTimeFormat() {
+        return createTimeFormat;
+    }
+
+    public void setCreateTimeFormat(String createTimeFormat) {
+        this.createTimeFormat = createTimeFormat;
+    }
+
 }

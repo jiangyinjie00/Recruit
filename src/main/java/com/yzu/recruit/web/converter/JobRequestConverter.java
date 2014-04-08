@@ -19,6 +19,10 @@ public class JobRequestConverter {
             String auditionRespondTimeFormat = DateUtil.dateToString(jobRequestEntityExt.getAuditionrespondtime());
             jobRequestEntityExt.setAuditionRespondTimeFormat(auditionRespondTimeFormat);
         }
+        if (null != jobRequestEntityExt.getCreatetime() && !"".equals(jobRequestEntityExt.getCreatetime())) {
+            String createTimeFormat = DateUtil.dateToString(jobRequestEntityExt.getCreatetime());
+            jobRequestEntityExt.setCreateTimeFormat(createTimeFormat);
+        }
         return jobRequestEntityExt;
     }
 
