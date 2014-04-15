@@ -16,7 +16,7 @@ angular.module('recruitApp.controller')
     $scope.initResume = function() {
         $scope.educationList = [];
         $scope.deleteEducationList = [];
-        restClient.post(RestfulAPI.USER_RESUME, {userID : 7}).then(function(){
+        restClient.post(RestfulAPI.USER_RESUME, {userID : 10}).then(function(){
             var user = restClient.getResponse();
             $scope.information = user.userInfoEntityExt;
             $scope.educationList = user.educationEntityExtList;

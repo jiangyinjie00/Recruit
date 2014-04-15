@@ -140,6 +140,13 @@ public class JobRequestServiceImpl implements JobRequestService {
         return jobRequestEntityMapperExt.queryAllOwnJobRequests(userID);
     }
 
+    @Override
+    public void updateAuditionResponse(String opinion, int jobRequestID) {
+        Date auditionResponseDate = new Date();
+        jobRequestEntityMapperExt.updateAuditionResponse(opinion, auditionResponseDate, jobRequestID);
+
+    }
+
 
 
 }

@@ -147,6 +147,17 @@ public class JobRequestController {
 
     }
 
+    @RequestMapping(value = "/job/auditionResponse", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    JsonResponse<Integer> auditionResponse(HttpServletRequest request,
+            HttpServletResponse response, @RequestBody Operation operation) {
+
+        jobRequestService.updateAuditionResponse(operation.getOpinion(), operation.getJobRequestID());
+
+        return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, 1);
+
+    }
+
     @RequestMapping(value = "/job/audition", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     JsonResponse<Integer> audition(HttpServletRequest request,

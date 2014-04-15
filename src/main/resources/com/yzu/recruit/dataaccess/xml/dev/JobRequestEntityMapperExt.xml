@@ -270,6 +270,16 @@
         JobRequestID = #{jobRequestID}
     </update>
     
+    <update id="updateAuditionResponse" parameterType="map">
+        UPDATE
+        JobRequest AS _JobRequest
+        SET
+        _JobRequest.AuditionRespond = #{auditionResponse},
+        _JobRequest.AuditionRespondTime = #{auditionResponseTime}
+        WHERE
+        JobRequestID = #{jobRequestID}
+    </update>
+    
     <update id="markForDeleteJobRequest" parameterType="JobRequestEntityExt">
         UPDATE JobRequest SET
         MarkForDelete = true

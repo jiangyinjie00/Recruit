@@ -33,4 +33,6 @@ public interface JobRequestService {
 
     int queryAllOwnJobRequests(int userID);
 
+    void updateAuditionResponse(String opinion, int jobRequestID);
+
 }

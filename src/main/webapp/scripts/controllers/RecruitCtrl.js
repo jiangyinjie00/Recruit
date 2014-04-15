@@ -116,7 +116,7 @@ angular.module('recruitApp.controller')
                  width:180
              },
              {
-                 field: 'starttime',
+                 field: 'startTimeFormat',
                  displayName: "发布时间",
                  //cellTemplate: template,
                  //headerCellTemplate: $scope.headerCellTemplate,

@@ -11,6 +11,15 @@ angular.module('recruitApp.controller')
         });
     };
     
+    $scope.responseAudition = function() {
+    	var condition = {};
+    	condition.jobRequestID = $scope.jobRequest.jobrequestid;
+    	condition.opinion = $scope.auditionResponse;
+    	restClient.post(RestfulAPI.JOB_AUDITION_RESPONSE, {}, condition).then(function(){
+    		$scope.initRequest();
+        });
+    };
+    
     $scope.operationRequest = function(boolean) {
     	var user = $rootScope.currentUser;
     	var statusID;

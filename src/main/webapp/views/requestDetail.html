@@ -1,5 +1,5 @@
 <div class="maxwidth" ng-init="initRequest()">
-    <div>
+    <div class="margin-top-20">
         <div class="row">
             <label>申请人：</label> 
             <span class="span2"> 
@@ -27,7 +27,34 @@
         <div class="row">
             <label>状态改变时间：</label> 
             <span class="span2"> 
-                <input class="input-style" ng-model="jobRequest.statuschangetime" readonly />
+                <input class="input-style" ng-model="jobRequest.statusChangeTimeFormat" readonly />
+            </span>
+        </div>
+        <div class="row" ng-show="jobRequest.auditionTimeFormat != null">
+            <label>面试时间：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.auditionTimeFormat" readonly />
+            </span>
+        </div>
+        <div class="row" ng-show="jobRequest.auditionTimeFormat != null"> 
+            <label>面试批示：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.auditioninfo" readonly />
+            </span>
+        </div>
+        <div class="row" ng-show="jobRequest.auditionrespond == null && jobRequest.auditionTimeFormat != null && currentUser.roleID == 5">
+            <label>面试回复：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="auditionResponse" />
+            </span>
+            <div>
+	            <button ng-click="responseAudition()">回复</button>
+            </div>
+        </div>
+        <div class="row" ng-show="jobRequest.auditionRespondTimeFormat != null"> 
+            <label>面试回复：</label> 
+            <span class="span2"> 
+                <input class="input-style" ng-model="jobRequest.auditionrespond" readonly />
             </span>
         </div>
         <div class="row" ng-show="currentUser.roleID != 5">
@@ -35,8 +62,10 @@
             <span class="span2"> 
                 <input class="input-style" ng-model="opinion" />
             </span>
-            <button ng-click="operationRequest(true)">通过</button>
-            <button ng-click="operationRequest(false)">拒绝</button>
+            <div>
+	            <button ng-click="operationRequest(true)">通过</button>
+	            <button ng-click="operationRequest(false)">拒绝</button>
+            </div>
         </div>
     </div>
     

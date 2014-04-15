@@ -30,6 +30,18 @@ var Types = {
 		3 : "设计类"
 };
 
+var Years = {
+		2018 : 2018,
+		2017 : 2017,
+		2016 : 2016,
+		2015 : 2015,
+		2014 : 2014,
+		2013 : 2013,
+		2012 : 2012,
+		2011 : 2011,
+		2010 : 2010
+};
+
 var RestfulAPI = {
         "USER_REGISTER" : "user/register",
         "LOGIN" : "user/login",
@@ -49,5 +61,6 @@ var RestfulAPI = {
         "JOB_AUDITIONJOBREQUESTS" : "job/auditionJobRequests",
         "JOB_REQUEST_DETAIL" : "job/requestDetail/:jobRequestID",
         "JOB_REQUEST_STATUS_CHANGE" : "job/requestStatusChange",
+        "JOB_AUDITION_RESPONSE" : "job/auditionResponse",
         "JOB_AUDITION" : "job/audition"
 };
