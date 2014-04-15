@@ -1,8 +1,8 @@
 <div class="maxwidth" ng-init="init()">
 
-    <div>
+    <div id="permission">
         <ul ng-show="currentUser.roleID == 4">
-            <li><a href="#/addRecruit">添加招聘</a></li>
+            <li><a href="#/addRecruit"><button>添加招聘</button></a></li>
         </ul>
         <ul ng-show="currentUser.roleID == 3">
             <li><a href="#/audition">未发布面试</a></li>

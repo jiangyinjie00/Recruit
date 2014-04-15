@@ -51,7 +51,7 @@ angular.module('recruitApp.controller')
                     width:180
                 },
                 {
-                    field: 'timestamp',
+                    field: 'createTimeFormat',
                     displayName: "申请时间",
                     //cellTemplate: template,
                     //headerCellTemplate: $scope.headerCellTemplate,

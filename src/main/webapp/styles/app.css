@@ -526,3 +526,40 @@ body {
     width: 380px;
     height: 90px;
 }
+
+#login {
+	margin-left: 130px;
+}
+
+#login label {
+	display: inline-block;
+	width: 60px;
+}
+
+#login input {
+	width: 170px;
+	height: 30px;
+}
+
+.margin-top-30 {
+	margin-top: 30px;
+}
+
+#permission {
+	margin-top: 10px;
+}
+#permission button{
+    background-color: #F77A13;
+    width: 82px;
+    height: 36px;
+    color: white;
+    font-size: 15px;
+}
+
+.button1 {
+	background-color: #F77A13;
+    width: 82px;
+    height: 36px;
+    color: white;
+    font-size: 15px;
+}

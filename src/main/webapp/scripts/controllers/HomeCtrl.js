@@ -1,7 +1,5 @@
 
 angular.module('recruitApp.controller')
 
-.controller('HomeCtrl', ['$scope',
-    function($scope) {
-    
+.controller('HomeCtrl', ['$scope', 'dialogService', 'userService', function($scope, dialogService, userService) {
 }]);

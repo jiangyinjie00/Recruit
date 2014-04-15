@@ -35,6 +35,29 @@ angular.module('recruitApp.controller')
         }
     };
     
+    $scope.initResumeDetail = function() {
+    	var userid = $routeParams.userID;
+    	$scope.educationList = [];
+    	$scope.deleteEducationList = [];
+    	restClient.post(RestfulAPI.USER_RESUME, {userID : userid}).then(function(){
+    		var user = restClient.getResponse();
+    		$scope.information = user.userInfoEntityExt;
+    		$scope.educationList = user.educationEntityExtList;
+    		$scope.experience = user.experienceEntityExt;
+    	});
+    	if ($scope.educationList.length == 0) {
+    		$scope.newEducation = {
+    				num : 1,
+    				degree : '',
+    				graduationdate : new Date(),
+    				major : '',
+    				majorranking : '',
+    				academy : ''
+    		};
+    		$scope.educationList.push($scope.newEducation);
+    	}
+    };
+    
     $scope.addEducation = function() {
         $scope.newEducation = {
                 num : $scope.educationList.length + 1,
