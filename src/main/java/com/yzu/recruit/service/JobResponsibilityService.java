@@ -7,7 +7,7 @@ import com.yzu.recruit.dataaccess.model.JobResponsibilityEntityExt;
 public interface JobResponsibilityService {
     public int saveJobResponsibility(JobResponsibilityEntityExt jobResponsibilityEntityExt);
 
-    public void updateJobResponsibility(List<JobResponsibilityEntityExt> jobResponsibilityEntityExtList);
+    public void updateJobResponsibility(List<JobResponsibilityEntityExt> jobResponsibilityEntityExtList, int jobrecruitid);
 
     public void markForDeleteJobResponsibility(JobResponsibilityEntityExt jobResponsibilityEntityExt);
 

@@ -13,4 +13,6 @@ public interface JobRecruitService {
     int addJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
 
     int deleteJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
+
+    void updateJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
 }

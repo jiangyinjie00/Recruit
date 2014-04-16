@@ -3,9 +3,7 @@
         <div class="row">
             <label>职位类别：</label> <span class="span2"> 
             <select ui-select2="{'tabIndex' : 1, 'dropdownCssClass':'select-dropdown hide-dropdown-search' }" 
-               id="type" name="type" ng-model="jobRecruit.type" data-placeholder="ddddd">
-                 <option></option>
-                 <option ng-repeat="(key, value) in types" value="{{value}}">{{value}}</option>
+               id="type" name="type" ng-model="jobRecruit.type" ng-options="value for (key , value) in types">
            </select>
             </span>
         </div>
@@ -13,18 +11,14 @@
             <label>职位：</label> 
             <span class="span2"> 
             <select ui-select2="{'tabIndex' : 1, 'dropdownCssClass':'select-dropdown hide-dropdown-search' }" 
-               id="jobid" name="jobid" ng-model="jobRecruit.jobid" data-placeholder="ddddd">
-                 <option></option>
-                 <option ng-repeat="job in jobList" value="{{job.jobid}}">{{job.name}}</option>
+               id="jobid" name="jobid" ng-model="jobRecruit.job" ng-options="job.name for job in jobList">
            </select>
             </span>
         </div>
         <div class="row">
             <label>工作地点：</label> <span class="span2"> 
             <select ui-select2="{'tabIndex' : 1, 'dropdownCssClass':'select-dropdown hide-dropdown-search' }" 
-               id="city" name="city" ng-model="jobRecruit.city" data-placeholder="ddddd">
-                 <option></option>
-                 <option ng-repeat="(key, value) in citys" value="{{value}}">{{value}}</option>
+               id="city" name="city" ng-model="jobRecruit.city" ng-options="value for (key , value) in citys">
            </select>
             </span>
         </div>
@@ -35,14 +29,14 @@
         </div>
         <div class="row">
             <label>开始时间：</label> <span class="span2"> 
-            <input class="input-style" recruit-datepicker="{showMeridian: false}" ng-model="jobRecruit.starttime" />
+            <input class="input-style" recruit-datepicker="{showMeridian: false}" ng-model="jobRecruit.startTimeFormat" />
             </span>
         </div>
         
         <div class="row" ng-model="jobRecruit.expiretime">
             <label>结束时间：</label> 
             <span class="span2">
-            <input class="input-style" recruit-datepicker="{showMeridian: false}" ng-model="jobRecruit.expiretime" />
+            <input class="input-style" recruit-datepicker="{showMeridian: false}" ng-model="jobRecruit.expireTimeFormat" />
             </span>
         </div>
         

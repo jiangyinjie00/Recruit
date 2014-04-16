@@ -21,7 +21,7 @@ public class JobResponsibilityServiceImpl implements JobResponsibilityService {
     }
 
     @Override
-    public void updateJobResponsibility(List<JobResponsibilityEntityExt> jobResponsibilityEntityExtList) {
+    public void updateJobResponsibility(List<JobResponsibilityEntityExt> jobResponsibilityEntityExtList, int jobRecruitID) {
         for (JobResponsibilityEntityExt jobResponsibilityEntityExt : jobResponsibilityEntityExtList) {
             if (null != jobResponsibilityEntityExt.getJobresponsibilityid() && jobResponsibilityEntityExt.getJobresponsibilityid() > 0) {
                 if (jobResponsibilityEntityExt.getMarkfordelete()) {
@@ -30,6 +30,7 @@ public class JobResponsibilityServiceImpl implements JobResponsibilityService {
                     jobResponsibilityEntityMapperExt.markForDeleteJobResponsibility(jobResponsibilityEntityExt);
                 }
             } else {
+                jobResponsibilityEntityExt.setJobrecruitid(jobRecruitID);
                 jobResponsibilityEntityMapperExt.saveJobResponsibility(jobResponsibilityEntityExt);
             }
         }

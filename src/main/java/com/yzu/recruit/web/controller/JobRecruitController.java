@@ -59,6 +59,15 @@ public class JobRecruitController {
 
     }
 
+    @RequestMapping(value = "/job/updateJobRecruit", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    JsonResponse<Integer> updateJobRecruit(HttpServletRequest request,
+            HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {
+        jobRecruitService.updateJobRecruitEntityExt(jobRecruitEntityExt);
+        return new JsonResponse<Integer>(Constant.STATUS_SUCCESS);
+
+    }
+
     @RequestMapping(value = "/job/jobs", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody
     JsonResponse<PageDataModel<JobRecruitEntityExt>> queryJobs(HttpServletRequest request,

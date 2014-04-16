@@ -83,4 +83,15 @@ public class JobRecruitServiceImpl implements JobRecruitService {
         return jobRecruitEntityMapperExt.deleteJobRecruitEntityExt(jobRecruitEntityExt.getJobrecruitid());
     }
 
+    @Override
+    public void updateJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt) {
+        JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.stringToDate(jobRecruitEntityExt);
+        jobRecruitEntityMapperExt.saveJobRecruitEntityExt(jobRecruitEntityExtFormat);
+        int jobrecruitid = jobRecruitEntityExt.getJobrecruitid();
+        List<JobRequireEntityExt> jobRequireEntityExts = jobRecruitEntityExt.getJobRequireEntityExts();
+        List<JobResponsibilityEntityExt> jobResponsibilityEntityExts = jobRecruitEntityExt.getJobResponsibilityEntityExts();
+        jobRequireService.updateJobRequire(jobRequireEntityExts, jobrecruitid);
+        jobResponsibilityService.updateJobResponsibility(jobResponsibilityEntityExts, jobrecruitid);
+    }
+
 }

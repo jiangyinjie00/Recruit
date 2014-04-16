@@ -55,6 +55,7 @@ var RestfulAPI = {
         "JOB_JOBS" : "job/jobs",
         "JOB_CREATE_JOB_REQUEST" : "job/createJobRequest",
         "JOB_CREATE_JOB_RECRUIT" : "job/createJobRecruit",
+        "JOB_UPDATE_JOB_RECRUIT" : "job/updateJobRecruit",
         "JOB_JOBENTITYS" : "job/jobEntitys",
         "JOB_REQUESTS" : "job/jobRequests",
         "JOB_OWNJOBREQUESTS" : "job/ownJobRequests",

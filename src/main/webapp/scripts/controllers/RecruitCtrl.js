@@ -167,8 +167,10 @@ angular.module('recruitApp.controller')
             	};
             	$scope.jobResponsibilityList.push($scope.newJobResponsibility);
             }
-            
+            $scope.jobRecruit.job = $scope.jobList[$scope.jobRecruit.jobid-1];
         });
+    	
+    	
     	
     	
     };
@@ -275,6 +277,8 @@ angular.module('recruitApp.controller')
     };
     
     $scope.saveJobRecruit = function() {
+    	$scope.jobRecruit.jobid = $scope.jobRecruit.job.jobid;
+    	delete $scope.jobRecruit.job;
         for(var index in $scope.jobRequireList) {
             delete $scope.jobRequireList[index].$$hashKey;
         }
@@ -286,19 +290,27 @@ angular.module('recruitApp.controller')
         $scope.jobRecruit.jobRequireEntityExts = $scope.jobRequireList;
         $scope.jobRecruit.jobResponsibilityEntityExts = $scope.jobResponsibilityList;
         
-        restClient.post(RestfulAPI.JOB_CREATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
-        	
-        });
+        if ($rootScope.currentUser.roleID == 3) {
+        	 restClient.post(RestfulAPI.JOB_UPDATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
+             	
+             });
+        } else {
+        	 restClient.post(RestfulAPI.JOB_CREATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
+             	
+             });
+        }
+        
+       
     };
     
     $scope.updateJobRecruit = function() {
     	for(var index in $scope.deleteJobRequireList) {
-    		$scope.deleteJobRequireList[index].markfordelete = 1;
+    		$scope.deleteJobRequireList[index].markfordelete = true;
     		$scope.jobRequireList.push($scope.deleteJobRequireList[index]);
     	}
     	
     	for(var index in $scope.deleteJobResponsibilityList) {
-    		$scope.deleteJobResponsibilityList[index].markfordelete = 1;
+    		$scope.deleteJobResponsibilityList[index].markfordelete = true;
     		$scope.jobResponsibilityList.push($scope.deleteJobResponsibilityList[index]);
     	}
     	

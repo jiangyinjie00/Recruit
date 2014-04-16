@@ -21,7 +21,7 @@ public class JobRequireServiceImpl implements JobRequireService {
     }
 
     @Override
-    public void updateJobRequire(List<JobRequireEntityExt> jobRequireEntityExtList) {
+    public void updateJobRequire(List<JobRequireEntityExt> jobRequireEntityExtList, int jobRecruitID) {
         for (JobRequireEntityExt jobRequireEntityExt : jobRequireEntityExtList) {
             if (null != jobRequireEntityExt.getJobrequireid() && jobRequireEntityExt.getJobrequireid() > 0) {
                 if (jobRequireEntityExt.getMarkfordelete()) {
@@ -30,6 +30,7 @@ public class JobRequireServiceImpl implements JobRequireService {
                     jobRequireEntityMapperExt.markForDeleteJobRequire(jobRequireEntityExt);
                 }
             } else {
+                jobRequireEntityExt.setJobrecruitid(jobRecruitID);
                 jobRequireEntityMapperExt.saveJobRequire(jobRequireEntityExt);
             }
         }
