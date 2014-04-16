@@ -1,5 +1,5 @@
 angular.module('recruitApp.controller')
-.controller('RecruitCtrl', ['$scope', 'restClient', '$injector', '$rootScope', function($scope, restClient, $injector, $rootScope) {
+.controller('RecruitCtrl', ['$scope', 'restClient', '$injector', '$routeParams', '$rootScope', function($scope, restClient, $injector, $routeParams, $rootScope) {
 	$injector.invoke(BaseCtrl, this, {$scope: $scope});
     $scope.getUrlVar = function(name ){
         var vars = [], hash;
@@ -131,6 +131,47 @@ angular.module('recruitApp.controller')
              }
     ];
  
+    $scope.initAddOrEditRecruit = function() {
+    	restClient.post(RestfulAPI.JOB_JOBENTITYS, {}).then(function() {
+        	$scope.jobList = restClient.getResponse();
+        });
+        
+        $scope.citys = Citys;
+        $scope.types = Types;
+    	var url = window.location.href;
+    	if (url.indexOf("add") > 0) {
+    		$scope.initAddRecruit();
+    	} else {
+    		 $scope.initEditRecruit();
+    	}
+    };
+    
+    $scope.initEditRecruit = function() {
+    	restClient.post(RestfulAPI.JOB_DETAIL, {jobRecruitID : 1}).then(function() {
+        	$scope.jobRecruit = restClient.getResponse();
+        	$scope.jobRequireList = $scope.jobRecruit.jobRequireEntityExts;
+            $scope.deleteJobRequireList = [];
+            $scope.jobResponsibilityList = $scope.jobRecruit.jobResponsibilityEntityExts;
+            $scope.deleteJobResponsibilityList = [];
+            if ($scope.jobRequireList.length == 0) {
+            	$scope.newJobRequire = {
+                        num : 1,
+                        description : ''
+                };
+                $scope.jobRequireList.push($scope.newJobRequire);
+            }
+            if ($scope.jobResponsibilityList.length == 0) {
+            	$scope.newJobResponsibility = {
+            			num : 1,
+            			description : ''
+            	};
+            	$scope.jobResponsibilityList.push($scope.newJobResponsibility);
+            }
+            
+        });
+    	
+    	
+    };
     
     $scope.initAddRecruit = function() {
         $scope.jobRequireList = [];
@@ -152,15 +193,7 @@ angular.module('recruitApp.controller')
         	$scope.jobResponsibilityList.push($scope.newJobResponsibility);
         }
         
-        restClient.post(RestfulAPI.JOB_JOBENTITYS, {}).then(function() {
-        	$scope.jobList = restClient.getResponse();
-        });
         
-        $scope.citys = Citys;
-        $scope.types = Types;
-        $scope.datepicker = {
-        	  "date": "2012-09-01T00:00:00.000Z"
-        	};
     };
     
     $scope.addJobRequire = function() {

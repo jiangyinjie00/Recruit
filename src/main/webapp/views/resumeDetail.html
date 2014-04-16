@@ -26,9 +26,12 @@
                     </span>
                 </div>
                 <div class="row">
-                    <label>性别：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="information.gender" />
+                    <label>性别：</label> <span class="span2"> <input readonly type="radio"
+                        name="gender" ng-model="information.gender" value="男" />男 <input readonly
+                        type="radio" class="margin-left-30" name="gender"
+                        ng-model="information.gender" value="女" />女
                     </span>
+
                 </div>
                 <div class="row">
                     <label>民族：</label> <span class="span2"> <input readonly
@@ -57,7 +60,9 @@
                 </div>
                 <div class="row">
                     <label>婚姻状况：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="information.marrige" />
+                        type="radio" name="marrige" ng-model="information.marrige"
+                        value="0" />未婚 <input readonly type="radio" class="margin-left-30"
+                        name="marrige" ng-model="information.marrige" value="1" />已婚
                     </span>
                 </div>
                 <div class="row">
@@ -66,13 +71,20 @@
                     </span>
                 </div>
                 <div class="row">
-                    <label>掌握外语及程度：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="information.foreignlanguage" />
+                    <label>掌握外语及程度：</label> <span class="span2"> <select readonly
+                        ng-model="information.foreignlanguage">
+                            <option value="4">CET4</option>
+                            <option value="6">CET6</option>
+                    </select>
                     </span>
                 </div>
                 <div class="row">
-                    <label>计算机掌握程度：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="information.computerlevel" />
+                    <label>计算机掌握程度：</label> <span class="span2"> <select readonly
+                        ng-model="information.computerlevel">
+                            <option value="2">计算机二级</option>
+                            <option value="3">计算机三级</option>
+                            <option value="4">计算机四级</option>
+                    </select>
                     </span>
                 </div>
             </div>
@@ -85,7 +97,8 @@
                     </div>
                     <div class="row">
                         <label>毕业时间：</label> <span class="span2"> <input readonly
-                            class="input-style" ng-model="education.graduationdate" />
+                            class="input-style" ng-model="education.graduationdate"
+                            recruit-datepicker />
                         </span>
                     </div>
                     <div class="row">
@@ -94,8 +107,12 @@
                         </span>
                     </div>
                     <div class="row">
-                        <label>专业排名：</label> <span class="span2"> <input readonly
-                            class="input-style" ng-model="education.majorranking" />
+                        <label>专业排名：</label> <span class="span2"> <select readonly
+                            ng-model="education.majorranking">
+                                <option value="5">专业前5%</option>
+                                <option value="20">专业前20%</option>
+                                <option value="50">专业前50%</option>
+                        </select>
                         </span>
                     </div>
                     <div class="row">
@@ -103,38 +120,39 @@
                             class="input-style" ng-model="education.academy" />
                         </span>
                     </div>
+                    <div class="margin-top-20"></div>
                 </div>
             </div>
 
             <div id="user_Experience" ng-show="activeTab == 2">
                 <div class="row">
-                    <label>实习经历：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="experience.practiceexperience" />
+                    <label>实习经历：</label> <span class="span2"> <textarea readonly 
+                            class="textarea-style" ng-model="experience.practiceexperience" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>工作经历：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="experience.workexperience" />
+                    <label>工作经历：</label> <span class="span2"> <textarea readonly
+                            class="textarea-style" ng-model="experience.workexperience" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>成就：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="experience.achievement" />
+                    <label>成就：</label> <span class="span2"> <textarea readonly
+                            class="textarea-style" ng-model="experience.achievement" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>奖项：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="experience.rewards" />
+                    <label>奖项：</label> <span class="span2"> <textarea readonly
+                            class="textarea-style" ng-model="experience.rewards" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>资格证书：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="experience.qualification" />
+                    <label>资格证书：</label> <span class="span2"> <textarea readonly
+                            class="textarea-style" ng-model="experience.qualification" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>自我评价：</label> <span class="span2"> <input readonly
-                        class="input-style" ng-model="experience.aboutme" />
+                    <label>自我评价：</label> <span class="span2"> <textarea readonly
+                            class="textarea-style" ng-model="experience.aboutme" /></textarea>
                     </span>
                 </div>
             </div>

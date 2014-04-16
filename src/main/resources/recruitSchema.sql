@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 DROP SCHEMA IF EXISTS `Recruit` ;
 CREATE SCHEMA IF NOT EXISTS `Recruit` DEFAULT CHARACTER SET utf8 ;
@@ -109,7 +109,7 @@ CREATE  TABLE IF NOT EXISTS `Recruit`.`JobRecruit` (
   `City` VARCHAR(45) NULL ,
   PRIMARY KEY (`JobRecruitID`) ,
   INDEX `fk_DepartmentRequirement_Department1_idx` (`DepartmentID` ASC) ,
-  INDEX `fk_JobRequirement_Job1` (`JobID` ASC) ,
+  INDEX `fk_JobRequirement_Job1_idx` (`JobID` ASC) ,
   CONSTRAINT `fk_DepartmentRequirement_Department1`
     FOREIGN KEY (`DepartmentID` )
     REFERENCES `Recruit`.`Department` (`DepartmentID` )
@@ -132,11 +132,11 @@ DROP TABLE IF EXISTS `Recruit`.`Education` ;
 
 CREATE  TABLE IF NOT EXISTS `Recruit`.`Education` (
   `EducationID` INT(11) NOT NULL AUTO_INCREMENT ,
-  `Degree` VARCHAR(45) NOT NULL ,
-  `GraduationDate` DATETIME NOT NULL ,
-  `Major` VARCHAR(45) NOT NULL ,
-  `MajorRanking` VARCHAR(45) NOT NULL ,
-  `Academy` VARCHAR(45) NOT NULL ,
+  `Degree` VARCHAR(45) NULL ,
+  `GraduationDate` VARCHAR(45) NULL ,
+  `Major` VARCHAR(45) NULL ,
+  `MajorRanking` VARCHAR(45) NULL ,
+  `Academy` VARCHAR(45) NULL ,
   `UserID` INT(11) NOT NULL ,
   `MarkForDelete` INT(1) NULL DEFAULT false ,
   `Num` INT(11) NULL ,
@@ -214,11 +214,11 @@ CREATE  TABLE IF NOT EXISTS `Recruit`.`JobRequest` (
   `MarkForDelete` TINYINT(1) NULL DEFAULT false ,
   `JobRecruitID` INT(11) NOT NULL ,
   `Timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
-  `CreateTime` DATETIME NULL DEFAULT NULL ,
+  `CreateTime` DATETIME NULL ,
   PRIMARY KEY (`JobRequestID`) ,
   INDEX `fk_JobDemand_User1_idx` (`UserID` ASC) ,
   INDEX `fk_JobDemand_Status1_idx` (`StatusID` ASC) ,
-  INDEX `fk_JobRequest_JobRecruit1` (`JobRecruitID` ASC) ,
+  INDEX `fk_JobRequest_JobRecruit1_idx` (`JobRecruitID` ASC) ,
   CONSTRAINT `fk_JobDemand_User1`
     FOREIGN KEY (`UserID` )
     REFERENCES `Recruit`.`User` (`UserID` )
@@ -234,9 +234,7 @@ CREATE  TABLE IF NOT EXISTS `Recruit`.`JobRequest` (
     REFERENCES `Recruit`.`JobRecruit` (`JobRecruitID` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -281,7 +279,7 @@ CREATE  TABLE IF NOT EXISTS `Recruit`.`JobRequire` (
   `Description` TEXT NULL DEFAULT NULL ,
   `JobRecruitID` INT(11) NOT NULL ,
   `MarkForDelete` TINYINT(1) NULL DEFAULT false ,
-  `Num` INT(8) NULL ,
+  `Num` BIGINT(20) NULL ,
   PRIMARY KEY (`JobRequireID`) ,
   INDEX `fk_JobRequire_DepartmentRequirement1_idx` (`JobRecruitID` ASC) ,
   CONSTRAINT `fk_JobRequire_DepartmentRequirement1`
@@ -304,7 +302,7 @@ CREATE  TABLE IF NOT EXISTS `Recruit`.`JobResponsibility` (
   `Description` TEXT NULL DEFAULT NULL ,
   `JobRecruitID` INT(11) NOT NULL ,
   `MarkForDelete` TINYINT(1) NULL DEFAULT false ,
-  `Num` INT(8) NULL ,
+  `Num` BIGINT(20) NULL ,
   PRIMARY KEY (`JobResponsibilityID`) ,
   INDEX `fk_JobResponsibility_DepartmentRequirement1_idx` (`JobRecruitID` ASC) ,
   CONSTRAINT `fk_JobResponsibility_DepartmentRequirement1`
@@ -373,6 +371,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
+USE `Recruit` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

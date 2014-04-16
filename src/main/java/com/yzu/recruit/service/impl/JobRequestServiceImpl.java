@@ -132,7 +132,13 @@ public class JobRequestServiceImpl implements JobRequestService {
 
     @Override
     public List<JobRequestEntityExt> queryOwnJobRequests(int userID, Pagination pagination) {
-        return jobRequestEntityMapperExt.queryOwnJobRequests(userID, pagination);
+        List<JobRequestEntityExt> jobRequestEntityExts = jobRequestEntityMapperExt.queryOwnJobRequests(userID, pagination);
+        List<JobRequestEntityExt> jobRequestEntityExtList = new ArrayList<JobRequestEntityExt>();
+        for (JobRequestEntityExt jobRequestEntityExt : jobRequestEntityExts) {
+            JobRequestEntityExt jobRequestEntityExtFormat = JobRequestConverter.dateToString(jobRequestEntityExt);
+            jobRequestEntityExtList.add(jobRequestEntityExtFormat);
+        }
+        return jobRequestEntityExtList;
     }
 
     @Override

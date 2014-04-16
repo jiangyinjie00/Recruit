@@ -37,7 +37,7 @@ VALUES
 
 INSERT INTO `Education` (`EducationID`, `Degree`, `GraduationDate`, `Major`, `MajorRanking`, `Academy`, `UserID`, `MarkForDelete`, `Num`)
 VALUES
-(1, '本科', '2014-03-16 16:55:48', '计算机', '20', '计算机学院', 7, 0, 1);
+(1, '本科', '2014-03-16', '计算机', '20', '计算机学院', 7, 0, 1);
 
 INSERT INTO `Job` (`JobID`, `Name`) 
 VALUES 

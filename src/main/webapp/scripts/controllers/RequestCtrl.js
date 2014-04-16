@@ -56,9 +56,7 @@ angular.module('recruitApp.controller')
     $scope.gridOptions = {
             data : 'list.data',
             enableSorting: false,
-            showSelectionCheckbox: true,
-            columnDefs : [],
-  selectedItems:$scope.selectedRows
+            columnDefs : []
         };
         
   $scope.initOwnRequests = function() {
@@ -100,18 +98,18 @@ angular.module('recruitApp.controller')
                   width:180
               },
               {
-                  field: 'timestamp',
+                  field: 'createTimeFormat',
                   displayName: "申请时间",
                   //cellTemplate: template,
                   //headerCellTemplate: $scope.headerCellTemplate,
-                  width:100
+                  width:180
               },
               {
              	 field: 'jobrequestid',
              	 displayName: "查看请求",
              	 cellTemplate: template_operation,
              	 //headerCellTemplate: $scope.headerCellTemplate,
-             	 width:75
+             	 width:118
               }
      ];
   $scope.refresh = function() {

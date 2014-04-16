@@ -141,36 +141,37 @@
         <div id="user_Experience" ng-show="activeTab == 2">
             <form id="userExperience" name="userExperience">
                 <div class="row">
-                    <label>实习经历：</label> <span class="span2"> <input
-                       class="input-style" ng-model="experience.practiceexperience" />
+                    <label>实习经历：</label> <span class="span2"> 
+                    <textarea
+                       class="textarea-style" ng-model="experience.practiceexperience" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>工作经历：</label> <span class="span2"> <input
-                       class="input-style" ng-model="experience.workexperience" />
+                    <label>工作经历：</label> <span class="span2"> <textarea
+                       class="textarea-style" ng-model="experience.workexperience" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>成就：</label> <span class="span2"> <input
-                       class="input-style" ng-model="experience.achievement" />
+                    <label>成就：</label> <span class="span2"> <textarea
+                       class="textarea-style" ng-model="experience.achievement" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>奖项：</label> <span class="span2"> <input
-                       class="input-style" ng-model="experience.rewards" />
+                    <label>奖项：</label> <span class="span2"> <textarea
+                       class="textarea-style" ng-model="experience.rewards" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>资格证书：</label> <span class="span2"> <input
-                       class="input-style" ng-model="experience.qualification" />
+                    <label>资格证书：</label> <span class="span2"> <textarea
+                       class="textarea-style" ng-model="experience.qualification" /></textarea>
                     </span>
                 </div>
                 <div class="row">
-                    <label>自我评价：</label> <span class="span2"> <input
-                       class="input-style" ng-model="experience.aboutme" />
+                    <label>自我评价：</label> <span class="span2"> <textarea
+                       class="textarea-style" ng-model="experience.aboutme" /></textarea>
                     </span>
                 </div>
-                <button class="button2" ng-click="saveExperience()">保存</button>
+                <button id="save-button" class="button2" ng-click="saveExperience()">保存</button>
             </form>
         </div>
     </div>

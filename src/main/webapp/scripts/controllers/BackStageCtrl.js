@@ -48,28 +48,28 @@ angular.module('recruitApp.controller')
                     displayName: "地点",
                     //cellTemplate: template,
                     //headerCellTemplate: $scope.headerCellTemplate,
-                    width:180
+                    width:160
                 },
                 {
                     field: 'createTimeFormat',
                     displayName: "申请时间",
                     //cellTemplate: template,
                     //headerCellTemplate: $scope.headerCellTemplate,
-                    width:100
+                    width:120
                 },
                 {
                	 field: 'jobrequestid',
                	 displayName: "查看请求",
                	 cellTemplate: template_operation,
                	 //headerCellTemplate: $scope.headerCellTemplate,
-               	 width:75
+               	 width:100
                 },
                 {
                 	field: 'userid',
                 	displayName: "查看简历",
                 	cellTemplate: template_resume_operation,
                 	//headerCellTemplate: $scope.headerCellTemplate,
-                	width:75
+                	width:98
                 },
        ];
     $scope.refresh = function() {
