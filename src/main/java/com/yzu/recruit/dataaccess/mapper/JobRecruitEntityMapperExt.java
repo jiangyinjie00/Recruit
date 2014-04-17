@@ -20,4 +20,8 @@ public interface JobRecruitEntityMapperExt extends JobRecruitEntityMapper {
     int getJobRecruitEntityExtCountByCriateria(@Param("criteria") JobRecruitCriteria criteria);
 
     int deleteJobRecruitEntityExt(@Param("jobRecruitID") int jobRecruitID);
+
+    List<JobRecruitEntityExt> queryJobRecruitNotApprove(@Param("page")Pagination pagination);
+
+    int queryAllJobRecruitNotApprove();
 }

@@ -45,7 +45,7 @@ function BaseCtrl($scope, $rootScope, $routeParams, $location, $window, restClie
     // Search.
     $scope.search = function() {
         if ($scope.searchItem) {
-            $scope.criteria.searchItem.searchValue = $scope.searchItem.searchValue ;
+            $scope.criteria.searchItem.searchValue = $scope.searchValue ;
         }
         $scope.resetPaging();
         $scope.refresh();

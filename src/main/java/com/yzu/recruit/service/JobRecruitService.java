@@ -1,5 +1,7 @@
 package com.yzu.recruit.service;
 
+import java.util.List;
+
 import com.yzu.recruit.common.pagination.CriteriaMap;
 import com.yzu.recruit.common.pagination.PageDataModel;
 import com.yzu.recruit.common.pagination.Pagination;
@@ -15,4 +17,8 @@ public interface JobRecruitService {
     int deleteJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
 
     void updateJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
+
+    List<JobRecruitEntityExt> queryJobRecruitNotApprove(Pagination pagination);
+
+    int queryAllJobRecruitNotApprove();
 }

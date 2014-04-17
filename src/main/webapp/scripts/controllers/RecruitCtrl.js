@@ -50,6 +50,7 @@ angular.module('recruitApp.controller')
         }
         searchItem.searchValue = $scope.getUrlVar("searchKey");
         $scope.criteria.searchItem = searchItem;
+        $scope.searchValue = searchItem.searchValue;
         $scope.resetPaging();
         $scope.refresh();
         

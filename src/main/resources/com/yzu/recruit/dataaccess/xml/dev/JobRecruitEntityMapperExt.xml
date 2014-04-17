@@ -110,6 +110,27 @@
             ORDER BY ${criteria.orderByClause} ${criteria.sortMark}
         </if>
     </select>
+    
+    <select id="queryJobRecruitNotApprove" resultMap="JobRecruitExtResultMap" parameterType="map">
+        SELECT
+        <include refid="JobRecruitBaseColumn" />
+        ,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
+        FROM JobRecruit AS _JobRecruit
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        WHERE _JobRecruit.MarkForDelete = true 
+        <if test="page != null">
+            LIMIT ${page.startRow}, ${page.pageSize}
+        </if>
+    </select>
+    
+    <select id="queryAllJobRecruitNotApprove" resultType="java.lang.Integer">
+    SELECT
+        COUNT(*)
+        FROM JobRecruit AS _JobRecruit
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        WHERE _JobRecruit.MarkForDelete = true 
+    </select>
 
     <delete id="deleteByJobRecruitID" parameterType="java.lang.Integer">
         DELETE FROM

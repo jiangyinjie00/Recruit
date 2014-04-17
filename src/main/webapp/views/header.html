@@ -1,8 +1,8 @@
 <div id="header" ng-controller="HeaderCtrl">
   <div id="header-top">
     <div class="maxwidth">
-      <a href="index.html" class="left" id="logo"> 
-        <img src="http://imgcache.qq.com/ac/www_tencent/hr/img/logo.png" />
+      <a href="/Recruit" class="left" id="logo"> 
+        <img src="styles/logo.png" />
       </a>
       <div id="header-info" class="right">
         <span ng-show="currentUser.username">
@@ -19,9 +19,9 @@
   <div id="menus">
     <div class="maxwidth">
       <ul id="menu" class="left">
-        <li><a href="index.html">首页</a></li>
-        <li><a href="">认识腾讯</a></li>
-        <li><a href="">人在腾讯</a></li>
+        <li><a href="/Recruit">首页</a></li>
+        <li><a href="">认识公司</a></li>
+        <li><a href="">人在公司</a></li>
         <li ng-show="currentUser.roleID == 5"><a href="#/resume">个人简历</a></li>
         <li ng-show="currentUser.roleID == 5"><a href="#/ownRequests">申请表</a></li>
         <li ng-show="currentUser.roleID == 4"><a href="#/backStage">后台系统</a></li>

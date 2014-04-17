@@ -1,0 +1,25 @@
+<div class="maxwidth" ng-init="init()">
+    <div class="box10">
+        <div class="blueline">
+            <div class="breadline">职位搜索</div>
+        </div>
+        <div id="recruit-search">
+            <input class="search" ng-model="searchValue" type="text">
+            <button class="search-button" ng-click="search()">搜索</button>
+        </div>
+        <div id="search-condition">
+            <div id="city">
+                <a href="#/jobs?city=0" ><span>全部</span></a>
+                <a href="#/jobs?city=1" ><span>上海</span></a>
+                <a href="#/jobs?city=2" ><span>扬州</span></a>
+                <a href="#/jobs?city=3"><span>常州</span></a>
+            </div>
+            <div id="type">
+                <a href="#/jobs?type=0" ><span>全部</span></a>
+                <a href="#/jobs?type=1" ><span>技术类</span></a>
+                <a href="#/jobs?type=2" ><span>市场类</span></a>
+                <a href="#/jobs?type=3" ><span>设计类</span></a>
+            </div>
+        </div>
+    </div>
+    </div>    

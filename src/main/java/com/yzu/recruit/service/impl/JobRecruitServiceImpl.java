@@ -94,4 +94,20 @@ public class JobRecruitServiceImpl implements JobRecruitService {
         jobResponsibilityService.updateJobResponsibility(jobResponsibilityEntityExts, jobrecruitid);
     }
 
+    @Override
+    public List<JobRecruitEntityExt> queryJobRecruitNotApprove(Pagination pagination) {
+        List<JobRecruitEntityExt>  list = jobRecruitEntityMapperExt.queryJobRecruitNotApprove(pagination);
+        List<JobRecruitEntityExt> jobRecruitEntityExts = new ArrayList<JobRecruitEntityExt>();
+        for (JobRecruitEntityExt jobRecruitEntityExt : list) {
+            JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.dateToString(jobRecruitEntityExt);
+            jobRecruitEntityExts.add(jobRecruitEntityExtFormat);
+        }
+        return jobRecruitEntityExts;
+    }
+
+    @Override
+    public int queryAllJobRecruitNotApprove() {
+        return jobRecruitEntityMapperExt.queryAllJobRecruitNotApprove();
+    }
+
 }

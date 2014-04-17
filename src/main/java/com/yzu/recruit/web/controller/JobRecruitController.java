@@ -1,5 +1,7 @@
 package com.yzu.recruit.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -83,6 +85,29 @@ public class JobRecruitController {
 
         PageModel pageModel = recruitQueryVo.getPageModel();
         pageModel.setRowCount(jobRecruitPageModel.getPaging().getRowCount());
+        jobRecruitPageModel.setPaging(pageModel);
+
+        return new JsonResponse<PageDataModel<JobRecruitEntityExt>>(Constant.STATUS_SUCCESS, jobRecruitPageModel);
+
+    }
+
+    @RequestMapping(value = "/job/jobsNotApprove", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody
+    JsonResponse<PageDataModel<JobRecruitEntityExt>> jobsNotApprove(HttpServletRequest request,
+            HttpServletResponse response, @RequestBody RecruitQueryVo recruitQueryVo) {
+
+        Pagination pagination = CriteriaConverter.toPagination(recruitQueryVo.getPageModel());
+
+        List<JobRecruitEntityExt> jobRecruitEntityExts = jobRecruitService
+                .queryJobRecruitNotApprove(pagination);
+
+        int count = jobRecruitService.queryAllJobRecruitNotApprove();
+
+        PageModel pageModel = recruitQueryVo.getPageModel();
+        pageModel.setRowCount(count);
+
+        PageDataModel<JobRecruitEntityExt> jobRecruitPageModel = new PageDataModel<JobRecruitEntityExt>();
+        jobRecruitPageModel.setData(jobRecruitEntityExts);
         jobRecruitPageModel.setPaging(pageModel);
 
         return new JsonResponse<PageDataModel<JobRecruitEntityExt>>(Constant.STATUS_SUCCESS, jobRecruitPageModel);

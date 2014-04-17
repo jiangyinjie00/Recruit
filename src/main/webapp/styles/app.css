@@ -68,6 +68,10 @@ body {
 #logo {
 	padding: 10px 0;
 }
+#logo img {
+	width:150px;
+	height: 51px;
+}
 
 #header-top {
 	height: 70px;
@@ -547,6 +551,10 @@ body {
 
 #permission {
 	margin-top: 10px;
+}
+#permission li{
+	display: inline-block;
+	margin-right: 30px;
 }
 #permission button{
     background-color: #F77A13;

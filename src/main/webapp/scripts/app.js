@@ -44,6 +44,9 @@ angular.module('recruitApp').config([ '$routeProvider', '$httpProvider', functio
 	}).when('/editRecruit/:jobRecruitID', {
 		templateUrl : 'views/addRecruit.html',
 		controller : 'RecruitCtrl'
+	}).when('/editRecruit', {
+		templateUrl : 'views/editRecruit.html',
+		controller : 'EditRecruitCtrl'
 });
     
     $httpProvider.responseInterceptors.push([ '$rootScope', '$q', '$location', function($rootScope, $q, $location) {
