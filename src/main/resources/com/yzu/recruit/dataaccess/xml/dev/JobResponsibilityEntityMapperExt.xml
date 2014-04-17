@@ -6,6 +6,7 @@
         <result column="JOBRESPONSIBILITY_JOBRECRUITID" property="jobrecruitid" />
         <result column="JOBRESPONSIBILITY_MARKFORDELETE" property="markfordelete" />
         <result column="JOBRESPONSIBILITY_DESCRIPTION" property="description" />
+        <result column="JOBRESPONSIBILITY_NUM" property="num" />
     </resultMap>
 
     <resultMap id="JobResponsibilityExtResultMap" type="JobResponsibilityEntityExt" extends="JobResponsibilityExtBaseResultMap">
@@ -15,7 +16,8 @@
         _JobResponsibility.JobResponsibilityID AS JOBRESPONSIBILITY_JOBRESPONSIBILITYID,
         _JobResponsibility.JobRecruitID AS JOBRESPONSIBILITY_JOBRECRUITID,
         _JobResponsibility.MarkForDelete AS JOBRESPONSIBILITY_MARKFORDELETE,
-        _JobResponsibility.Description AS JOBRESPONSIBILITY_DESCRIPTION
+        _JobResponsibility.Description AS JOBRESPONSIBILITY_DESCRIPTION,
+        _JobResponsibility.Num AS JOBRESPONSIBILITY_NUM
     </sql>
     
     <insert id="saveJobResponsibility" parameterType="JobResponsibilityEntityExt" >
@@ -25,12 +27,12 @@
         INSERT INTO
             JobResponsibility (
                 JobRecruitID, 
-                MarkForDelete,
-                Description
+                Description,
+                Num
             ) VALUES (
                 #{jobrecruitid}, 
-                #{markfordelete},
-                #{description}
+                #{description},
+                #{num}
             )
     </insert>
   
@@ -40,7 +42,8 @@
         SET
             JobRecruitID = #{jobrecruitid},
             MarkForDelete = #{markfordelete},
-            Description = #{description}
+            Description = #{description},
+            Num = #{num}
         WHERE
             JobResponsibilityID = #{jobresponsibilityid}
     </update>

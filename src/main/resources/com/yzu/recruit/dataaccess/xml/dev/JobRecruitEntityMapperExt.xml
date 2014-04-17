@@ -70,10 +70,9 @@
         ,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
         FROM JobRecruit AS _JobRecruit
-        LEFT JOIN JobRequire AS _JobRequire ON _JobRecruit.JobRecruitID =
-        _JobRequire.JobRecruitID
+        LEFT JOIN JobRequire AS _JobRequire ON _JobRecruit.JobRecruitID = _JobRequire.JobRecruitID AND _JobRequire.MarkForDelete = false
         LEFT JOIN JobResponsibility AS _JobResponsibility ON _JobRecruit.JobRecruitID =
-        _JobResponsibility.JobRecruitID
+        _JobResponsibility.JobRecruitID AND _JobResponsibility.MarkForDelete = false
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
         WHERE
         _JobRecruit.JobRecruitID = #{jobRecruitID}

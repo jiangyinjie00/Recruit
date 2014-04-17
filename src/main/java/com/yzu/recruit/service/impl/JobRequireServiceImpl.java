@@ -24,7 +24,7 @@ public class JobRequireServiceImpl implements JobRequireService {
     public void updateJobRequire(List<JobRequireEntityExt> jobRequireEntityExtList, int jobRecruitID) {
         for (JobRequireEntityExt jobRequireEntityExt : jobRequireEntityExtList) {
             if (null != jobRequireEntityExt.getJobrequireid() && jobRequireEntityExt.getJobrequireid() > 0) {
-                if (jobRequireEntityExt.getMarkfordelete()) {
+                if (!jobRequireEntityExt.getMarkfordelete()) {
                     jobRequireEntityMapperExt.updateJobRequire(jobRequireEntityExt);
                 } else {
                     jobRequireEntityMapperExt.markForDeleteJobRequire(jobRequireEntityExt);

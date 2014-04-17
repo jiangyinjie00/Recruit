@@ -54,6 +54,7 @@ public class JobRecruitController {
         UserModel userModel = (UserModel) session.getAttribute("USER");
         DepartmentEntityExt department = departmentService.getDepartmentByUserID(userModel.getUserID());
         jobRecruitEntityExt.setDepartmentid(department.getDepartmentid());
+        jobRecruitEntityExt.setMarkfordelete(true);
         int jobRecruitID = jobRecruitService.addJobRecruitEntityExt(jobRecruitEntityExt);
         return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, jobRecruitID);
 
@@ -63,6 +64,7 @@ public class JobRecruitController {
     public @ResponseBody
     JsonResponse<Integer> updateJobRecruit(HttpServletRequest request,
             HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {
+        jobRecruitEntityExt.setMarkfordelete(false);
         jobRecruitService.updateJobRecruitEntityExt(jobRecruitEntityExt);
         return new JsonResponse<Integer>(Constant.STATUS_SUCCESS);
 

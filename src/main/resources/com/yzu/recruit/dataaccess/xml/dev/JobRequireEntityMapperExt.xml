@@ -6,6 +6,7 @@
         <result column="JOBREQUIRE_JOBRECRUITID" property="jobrecruitid" />
         <result column="JOBREQUIRE_MARKFORDELETE" property="markfordelete" />
         <result column="JOBREQUIRE_DESCRIPTION" property="description" />
+        <result column="JOBREQUIRE_NUM" property="num" />
     </resultMap>
 
     <resultMap id="JobRequireExtResultMap" type="JobRequireEntityExt" extends="JobRequireExtBaseResultMap">
@@ -16,7 +17,8 @@
         _JobRequire.JobRequireID AS JOBREQUIRE_JOBREQUIREID,
         _JobRequire.JobRecruitID AS JOBREQUIRE_JOBRECRUITID,
         _JobRequire.MarkForDelete AS JOBREQUIRE_MARKFORDELETE,
-        _JobRequire.Description AS JOBREQUIRE_DESCRIPTION
+        _JobRequire.Description AS JOBREQUIRE_DESCRIPTION,
+        _JobRequire.Num AS JOBREQUIRE_NUM
     </sql>
     
     <insert id="saveJobRequire" parameterType="JobRequireEntityExt" >
@@ -27,13 +29,13 @@
             JobRequire (
                 JobRequireID,
                 JobRecruitID, 
-                MarkForDelete,
-                Description
+                Description,
+                Num
             ) VALUES (
                 #{jobrequireid},
                 #{jobrecruitid}, 
-                #{markfordelete},
-                #{description}
+                #{description},
+                #{num}
             )
     </insert>
     
@@ -43,7 +45,8 @@
         SET
             JobRecruitID = #{jobrecruitid},
             MarkForDelete = #{markfordelete},
-            Description = #{description}
+            Description = #{description},
+            Num = #{num}
         WHERE
             JobRequireID = #{jobrequireid}
     </update>

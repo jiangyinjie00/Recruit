@@ -209,7 +209,7 @@ angular.module('recruitApp.controller')
     $scope.deleteJobRequire = function(num) {
         var index = $scope.getJobRequireIndexByNum(num);
         var deleteJobRequire = $scope.jobRequireList[index];
-        if (undefined != deleteJobRequire.jobRequireid && 0 != deleteJobRequire.jobRequireid) {
+        if (undefined != deleteJobRequire.jobrequireid && 0 != deleteJobRequire.jobrequireid) {
             $scope.deleteJobRequireList.push(deleteJobRequire);
         }
         $scope.jobRequireList.splice(index,1);
@@ -249,7 +249,7 @@ angular.module('recruitApp.controller')
     $scope.deleteJobResponsibility = function(num) {
         var index = $scope.getJobResponsibilityIndexByNum(num);
         var deleteJobResponsibility = $scope.jobResponsibilityList[index];
-        if (undefined != deleteJobResponsibility.jobResponsibilityid && 0 != deleteJobResponsibility.jobResponsibilityid) {
+        if (undefined != deleteJobResponsibility.jobresponsibilityid && 0 != deleteJobResponsibility.jobresponsibilityid) {
             $scope.deleteJobResponsibilityList.push(deleteJobResponsibility);
         }
         $scope.jobResponsibilityList.splice(index,1);
@@ -279,6 +279,17 @@ angular.module('recruitApp.controller')
     $scope.saveJobRecruit = function() {
     	$scope.jobRecruit.jobid = $scope.jobRecruit.job.jobid;
     	delete $scope.jobRecruit.job;
+    	
+    	for(var index in $scope.deleteJobRequireList) {
+            $scope.deleteJobRequireList[index].markfordelete = true;
+            $scope.jobRequireList.push($scope.deleteJobRequireList[index]);
+        }
+    	
+    	for(var index in $scope.deleteJobResponsibilityList) {
+    		$scope.deleteJobResponsibilityList[index].markfordelete = true;
+    		$scope.jobResponsibilityList.push($scope.deleteJobResponsibilityList[index]);
+    	}
+    	
         for(var index in $scope.jobRequireList) {
             delete $scope.jobRequireList[index].$$hashKey;
         }

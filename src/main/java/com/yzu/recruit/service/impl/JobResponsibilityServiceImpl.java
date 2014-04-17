@@ -24,7 +24,7 @@ public class JobResponsibilityServiceImpl implements JobResponsibilityService {
     public void updateJobResponsibility(List<JobResponsibilityEntityExt> jobResponsibilityEntityExtList, int jobRecruitID) {
         for (JobResponsibilityEntityExt jobResponsibilityEntityExt : jobResponsibilityEntityExtList) {
             if (null != jobResponsibilityEntityExt.getJobresponsibilityid() && jobResponsibilityEntityExt.getJobresponsibilityid() > 0) {
-                if (jobResponsibilityEntityExt.getMarkfordelete()) {
+                if (!jobResponsibilityEntityExt.getMarkfordelete()) {
                     jobResponsibilityEntityMapperExt.updateJobResponsibility(jobResponsibilityEntityExt);
                 } else {
                     jobResponsibilityEntityMapperExt.markForDeleteJobResponsibility(jobResponsibilityEntityExt);
