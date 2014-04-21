@@ -38,7 +38,7 @@ public class UserController {
             @RequestBody UserEntityExt userEntityExt) {
 
         try {
-            int userID = userService.createUser(userEntityExt);
+             int userID = userService.createUser(userEntityExt);
             HttpSession session = request.getSession();
             UserEntityExt user = userService.getBaseUserByID(userID);
             session.setAttribute("USER", UserConverter.entityToModel(user));

@@ -5,9 +5,18 @@ import java.util.List;
 import com.yzu.recruit.dataaccess.model.gen.UserEntity;
 
 public class UserEntityExt extends UserEntity {
+    private RoleEntityExt roleEntityExt;
     private UserInfoEntityExt userInfoEntityExt;
     private List<EducationEntityExt> educationEntityExtList;
     private ExperienceEntityExt experienceEntityExt;
+
+    public void setRoleEntityExt(RoleEntityExt roleEntityExt) {
+        this.roleEntityExt = roleEntityExt;
+    }
+
+    public RoleEntityExt getRoleEntityExt() {
+        return roleEntityExt;
+    }
 
     public UserInfoEntityExt getUserInfoEntityExt() {
         return userInfoEntityExt;

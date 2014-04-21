@@ -65,6 +65,14 @@
                         两次密码不匹配
                     </span>
                 </div>
+                 <div class="row" ng-show="currentUser.roleid == 5">
+                    <div>
+                        <select ng-model="user.roleid">
+                            <option value="4">部门主管</option>
+                            <option value="3">人事专员</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="submit">
                     <button ng-click="register(userForm.$invalid)">提交</button>
                 </div>

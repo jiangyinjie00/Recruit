@@ -65,7 +65,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public int createUser(UserEntityExt userEntityExt) {
         userEntityExt.setRegisterdate(new Date());
-        userEntityExt.setRoleid(Constant.ROLE_USER);
+        if (userEntityExt.getRoleid() == null) {
+            userEntityExt.setRoleid(Constant.ROLE_USER);
+        } else if (userEntityExt.getRoleid() == 3) {
+            userEntityExt.setRoleid(Constant.ROLE_HR);
+        } else if (userEntityExt.getRoleid() == 4) {
+            userEntityExt.setRoleid(Constant.ROLE_DEPARTMENT);
+        }
         userEntityExt.setPassword(EncryptionUtil.encrypt(userEntityExt.getPassword()));
         userEntityMapperExt.insertUserEntity(userEntityExt);
         return userEntityExt.getUserid();

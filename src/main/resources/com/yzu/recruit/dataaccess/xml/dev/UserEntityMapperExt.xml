@@ -12,6 +12,7 @@
     </resultMap>
 
     <resultMap type="UserEntityExt" id="UserExtResultMap" extends="UserExtBaseResultMap">
+        <association property="roleEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.RoleEntityMapperExt.RoleExtResultMap"></association>
         <association property="userInfoEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.UserInfoEntityMapperExt.UserInfoExtResultMap"></association>
         <association property="educationEntityExtList" resultMap="com.yzu.recruit.dataaccess.mapper.EducationEntityMapperExt.EducationExtResultMap"></association>
         <association property="experienceEntityExt" resultMap="com.yzu.recruit.dataaccess.mapper.ExperienceEntityMapperExt.ExperienceExtResultMap"></association>
@@ -50,19 +51,22 @@
         _UserInfo.UserID AS USERINFO_USERID
     </sql>
 
-    <select id="getBaseUserByID" parameterType="java.lang.String" resultMap="UserExtBaseResultMap">
+    <select id="getBaseUserByID" parameterType="java.lang.String" resultMap="UserExtResultMap">
         SELECT
-        <include refid="UserBaseColumn" />
+        <include refid="UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.RoleEntityMapperExt.RoleBaseColumn" />
         FROM User AS _User
-        LEFT JOIN UserInfo AS _UserInfo ON _User.UserID = _UserInfo.UserID
+        LEFT JOIN Role AS _Role ON _User.RoleID = _Role.RoleID
         WHERE
         _User.UserID = #{userID}
     </select>
 
-    <select id="getBaseUserByName" parameterType="java.lang.String" resultMap="UserExtBaseResultMap">
+    <select id="getBaseUserByName" parameterType="java.lang.String" resultMap="UserExtResultMap">
         SELECT
-        <include refid="UserBaseColumn" />
+        <include refid="UserBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.RoleEntityMapperExt.RoleBaseColumn" />
         FROM User AS _User
+        LEFT JOIN Role AS _Role ON _User.RoleID = _Role.RoleID
         WHERE
         _User.Name = #{userName}
     </select>

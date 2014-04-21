@@ -10,6 +10,7 @@ public class UserConverter {
         user.setUsername(userEntityExt.getName());
         user.setRoleID(userEntityExt.getRoleid());
         user.setLastLoginDate(userEntityExt.getLastlogindate());
+        user.setRoleName(userEntityExt.getRoleEntityExt().getDescription());
 
         return user;
     }

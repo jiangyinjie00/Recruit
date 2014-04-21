@@ -7,6 +7,15 @@ public class UserModel {
     private String username;
     private Date lastLoginDate;
     private int roleID;
+    private String roleName;
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
 
     public int getUserID() {
         return userID;

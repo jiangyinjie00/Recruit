@@ -10,18 +10,18 @@ VALUES
 /**************************User**************************************/
 INSERT INTO `User` (`UserID`, `Name`, `Password`, `RegisterDate`, `RoleID`)
 VALUES 
-(1, 'Admin', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 1),
-(2, 'HROfficer', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 2),
-(3, 'HR', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 3),
-(4, 'lifei', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 4),
-(5, 'georgeOfficer', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 4),
-(6, 'ben', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 4),
-(7, 'George', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 5),
-(8, 'DepartmentOfficer', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 4),
-(9, 'George1', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 5),
-(10, 'George2', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 5),
-(11, 'George3', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 5),
-(12, 'George4', '$2a$10$R2O3b/ov9OS0Ph2N99HIU.npITLDCjTi.jLmDrSMQISLEn/SX4X9y', '2014-03-16 16:55:48', 5);
+(1, 'Admin', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 1),
+(2, 'HROfficer', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 2),
+(3, 'HR', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 3),
+(4, 'lifei', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 4),
+(5, 'georgeOfficer', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 4),
+(6, 'ben', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 4),
+(7, 'George', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 5),
+(8, 'DepartmentOfficer', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 4),
+(9, 'George1', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 5),
+(10, 'George2', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 5),
+(11, 'George3', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 5),
+(12, 'George4', '$2a$10$cXH33AnsJinInWRy/i9UIOiTcE1Z47qOwiOQ4x.gX4LQyozOVYj/2', '2014-03-16 16:55:48', 5);
 
 /**************************department********************************/
 INSERT INTO `Department` (`DepartmentID`, `Name`, `Type`, `Leader`, `OfficeAddress`, `OfficeTelephone`, `PostalCode`, `PostalAddress`, `Introduction`, `UserID`, `MarkForDelete`)

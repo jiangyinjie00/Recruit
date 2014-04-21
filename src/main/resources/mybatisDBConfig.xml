@@ -16,5 +16,6 @@
         <typeAlias type="com.yzu.recruit.dataaccess.model.JobEntityExt" alias="JobEntityExt"/>
         <typeAlias type="com.yzu.recruit.dataaccess.model.StatusEntityExt" alias="StatusEntityExt"/>
         <typeAlias type="com.yzu.recruit.dataaccess.model.DepartmentEntityExt" alias="DepartmentEntityExt"/>
+        <typeAlias type="com.yzu.recruit.dataaccess.model.RoleEntityExt" alias="RoleEntityExt"/>
     </typeAliases>
 </configuration>
