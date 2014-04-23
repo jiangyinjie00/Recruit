@@ -63,9 +63,9 @@ public class UserController {
             session.setAttribute("USER", UserConverter.entityToModel(userEntity));
             response.setStatus(IHttpStateCode.OK);
         } catch (Exception exception) {
-            HandleWebException.handleWebException(exception, logger);
+            return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, 1);
         }
-        return new JsonResponse<Integer>(Constant.STATUS_SUCCESS);
+        return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, 0);
     }
 
     @RequestMapping(value = "/user/logout", method = RequestMethod.POST, produces = "application/json")

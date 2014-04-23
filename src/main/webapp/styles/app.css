@@ -602,3 +602,101 @@ body {
 	width: 210px;
     height: 50px;
 }
+
+.ngRow.odd { 
+  background-color: #FAFAFA;
+}
+.ngRow.even {
+  background-color: #FFFFFF;
+}
+
+.ngRow.even:hover,.ngRow.odd:hover {
+  background-color: #D4EBFA;
+}
+
+.pagination {
+  margin-top:0;
+  margin-bottom:0;
+  position: relative;
+  height: 20px;
+  margin-top: 12px;
+}
+.pagination-info {
+  right: 0px;
+  margin-right: 10px;
+  float: right;
+  font-family: Open Sans;
+  font-size: 12px;
+  color: #666;
+  margin-top: 12px;
+}
+.pagination ul {
+  margin-left: 0;
+  margin-bottom: 0;
+  height: 20px;
+  margin: auto;
+}
+.pagination ul>li>a {
+  font-size: 12px;
+  color: #999;
+  line-height: 14px;
+  height: 14px;
+  min-width: 8px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 4px;
+  border: 1px solid #CCC;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.pagination ul>li:first-child>a {
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.pagination ul>li:last-child>a {
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  border-bottom-right-radius: 0px;
+  width: 10px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+#grid-footer .active a {
+  color: #2980B9;
+  cursor: default;
+  border: 1px solid #2980B9;
+  background-color: #FFF;
+}
+
+#grid-footer .disabled a {
+  color: #DDD;
+  cursor: default;
+  border: 1px solid #DDD;
+  background-color: #FFF;
+}
+#page-number {
+  width: 30px;
+  height: 16px;
+  line-height: 16px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  margin-bottom: 0px;
+}
+
+#login-error {
+	margin-top: 10px;
+	margin-left: 100px;
+	color: red;
+	display: none;
+}

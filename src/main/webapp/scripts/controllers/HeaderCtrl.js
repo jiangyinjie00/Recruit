@@ -14,10 +14,8 @@ angular.module('recruitApp.controller')
         var options = {
             title:"登录",
             onOK:function(user){
-                restClient.post(RestfulAPI.LOGIN, {}, user).then(function(){
-                    userService.getCurrentUser();
-                    window.location.href = "/Recruit";
-                });
+            	userService.getCurrentUser();
+                
             },
         };
         dialogService.openLogin(options);
