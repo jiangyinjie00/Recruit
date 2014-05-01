@@ -49,7 +49,7 @@ angular.module('recruitApp.controller')
     	operation.jobRequestID = $scope.jobRequest.jobrequestid;
     	
     	restClient.post(RestfulAPI.JOB_REQUEST_STATUS_CHANGE, {}, operation).then(function(){
-
+    		window.location.href = "#/backStage";
     	});
     };
     

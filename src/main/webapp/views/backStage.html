@@ -8,6 +8,9 @@
             <li><a href="#/audition"><button>未发布面试</button></a></li>
             <li><a href="#/editRecruit"><button>招聘申请</button></a></li>
         </ul>
+        <ul ng-show="currentUser.roleID == 2">
+            <li><a href="#/editRecruit"><button>招聘申请</button></a></li>
+        </ul>
     </div>
 
      <div id="grid" class="gridStyle" ng-grid="gridOptions"></div>

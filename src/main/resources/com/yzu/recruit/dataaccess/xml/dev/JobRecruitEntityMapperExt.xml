@@ -12,6 +12,7 @@
         <result column="JOBRECRUIT_MARKFORDELETE" property="markfordelete" />
         <result column="JOBRECRUIT_JOBID" property="jobid" />
         <result column="JOBRECRUIT_TIMESTAMP" property="timestamp" />
+        <result column="JOBRECRUIT_APPROVE" property="approve" />
     </resultMap>
 
     <resultMap id="JobRecruitExtResultMap" type="JobRecruitEntityExt" extends="JobRecruitExtBaseResultMap">
@@ -37,7 +38,8 @@
         _JobRecruit.MarkForDelete AS
         JOBRECRUIT_MARKFORDELETE,
         _JobRecruit.JobID AS JOBRECRUIT_JOBID,
-        _JobRecruit.Timestamp AS JOBRECRUIT_TIMESTAMP
+        _JobRecruit.Timestamp AS JOBRECRUIT_TIMESTAMP,
+        _JobRecruit.Approve AS JOBRECRUIT_APPROVE
     </sql>
 
     <sql id="Criteria_Where_Clause">
@@ -85,7 +87,7 @@
         <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
         FROM JobRecruit AS _JobRecruit
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = false 
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true
         <if test="criteria != null">
             <include refid="Criteria_Where_Clause" />
         </if>
@@ -102,7 +104,7 @@
         COUNT(*)
         FROM JobRecruit AS _JobRecruit
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = false 
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true
         <if test="criteria != null">
             <include refid="Criteria_Where_Clause" />
         </if>
@@ -118,7 +120,7 @@
         <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
         FROM JobRecruit AS _JobRecruit
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = true 
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = false
         <if test="page != null">
             LIMIT ${page.startRow}, ${page.pageSize}
         </if>
@@ -129,7 +131,7 @@
         COUNT(*)
         FROM JobRecruit AS _JobRecruit
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = true 
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = false
     </select>
 
     <delete id="deleteByJobRecruitID" parameterType="java.lang.Integer">
@@ -153,7 +155,8 @@
         Type,
         JobID,
         DepartmentID,
-        MarkForDelete
+        MarkForDelete,
+        Approve
         ) VALUES (
         #{starttime},
         #{expiretime},
@@ -161,7 +164,8 @@
         #{type},
         #{jobid},
         #{departmentid},
-        #{markfordelete}
+        #{markfordelete},
+        #{approve}
         )
     </insert>
 
@@ -175,7 +179,8 @@
         Person = #{person},
         Type = #{type},
         DepartmentID = #{departmentid},
-        MarkForDelete = #{markfordelete}
+        MarkForDelete = #{markfordelete},
+        Approve = #{approve}
         WHERE
         JobRecruitID = #{jobrecruitid}
     </update>

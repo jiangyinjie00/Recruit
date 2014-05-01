@@ -37,35 +37,41 @@ public class JobRecruitController {
     @Autowired
     private DepartmentService departmentService;
 
-
     @RequestMapping(value = "/job/jobDetail/{jobRecruitID}", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse<JobRecruitEntityExt> getJobDetail(HttpServletRequest request,
+    public @ResponseBody JsonResponse<JobRecruitEntityExt> getJobDetail(HttpServletRequest request,
             HttpServletResponse response, @PathVariable int jobRecruitID) {
-        JobRecruitEntityExt jobRecruitEntityExt = jobRecruitService
-                .getJobRecruitEntityExtById(jobRecruitID);
+        JobRecruitEntityExt jobRecruitEntityExt = jobRecruitService.getJobRecruitEntityExtById(jobRecruitID);
         return new JsonResponse<JobRecruitEntityExt>(Constant.STATUS_SUCCESS, jobRecruitEntityExt);
 
     }
 
     @RequestMapping(value = "/job/createJobRecruit", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse<Integer> createJobRecruit(HttpServletRequest request,
+    public @ResponseBody JsonResponse<Integer> createJobRecruit(HttpServletRequest request,
             HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {
         HttpSession session = request.getSession();
         UserModel userModel = (UserModel) session.getAttribute("USER");
         DepartmentEntityExt department = departmentService.getDepartmentByUserID(userModel.getUserID());
         jobRecruitEntityExt.setDepartmentid(department.getDepartmentid());
-        jobRecruitEntityExt.setMarkfordelete(true);
+        jobRecruitEntityExt.setMarkfordelete(false);
+        jobRecruitEntityExt.setApprove(false);
         int jobRecruitID = jobRecruitService.addJobRecruitEntityExt(jobRecruitEntityExt);
         return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, jobRecruitID);
 
     }
 
     @RequestMapping(value = "/job/updateJobRecruit", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse<Integer> updateJobRecruit(HttpServletRequest request,
+    public @ResponseBody JsonResponse<Integer> updateJobRecruit(HttpServletRequest request,
             HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {
+        HttpSession session = request.getSession();
+        UserModel user = (UserModel) session.getAttribute("USER");
+
+        int roleID = user.getRoleID();
+
+        if (roleID == Constant.ROLE_HR) {
+            jobRecruitEntityExt.setApprove(false);
+        } else if (roleID == Constant.ROLE_HROFFICER) {
+            jobRecruitEntityExt.setApprove(true);
+        }
         jobRecruitEntityExt.setMarkfordelete(false);
         jobRecruitService.updateJobRecruitEntityExt(jobRecruitEntityExt);
         return new JsonResponse<Integer>(Constant.STATUS_SUCCESS);
@@ -73,15 +79,14 @@ public class JobRecruitController {
     }
 
     @RequestMapping(value = "/job/jobs", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse<PageDataModel<JobRecruitEntityExt>> queryJobs(HttpServletRequest request,
+    public @ResponseBody JsonResponse<PageDataModel<JobRecruitEntityExt>> queryJobs(HttpServletRequest request,
             HttpServletResponse response, @RequestBody RecruitQueryVo recruitQueryVo) {
 
         CriteriaMap criteriaMap = CriteriaConverter.recruitQueryVoToCriteriaMap(recruitQueryVo);
         Pagination pagination = CriteriaConverter.toPagination(recruitQueryVo.getPageModel());
 
-        PageDataModel<JobRecruitEntityExt> jobRecruitPageModel = jobRecruitService
-                .queryJobRecruitEntityExts(criteriaMap, pagination);
+        PageDataModel<JobRecruitEntityExt> jobRecruitPageModel = jobRecruitService.queryJobRecruitEntityExts(
+                criteriaMap, pagination);
 
         PageModel pageModel = recruitQueryVo.getPageModel();
         pageModel.setRowCount(jobRecruitPageModel.getPaging().getRowCount());
@@ -92,14 +97,12 @@ public class JobRecruitController {
     }
 
     @RequestMapping(value = "/job/jobsNotApprove", method = RequestMethod.POST, produces = "application/json")
-    public @ResponseBody
-    JsonResponse<PageDataModel<JobRecruitEntityExt>> jobsNotApprove(HttpServletRequest request,
+    public @ResponseBody JsonResponse<PageDataModel<JobRecruitEntityExt>> jobsNotApprove(HttpServletRequest request,
             HttpServletResponse response, @RequestBody RecruitQueryVo recruitQueryVo) {
 
         Pagination pagination = CriteriaConverter.toPagination(recruitQueryVo.getPageModel());
 
-        List<JobRecruitEntityExt> jobRecruitEntityExts = jobRecruitService
-                .queryJobRecruitNotApprove(pagination);
+        List<JobRecruitEntityExt> jobRecruitEntityExts = jobRecruitService.queryJobRecruitNotApprove(pagination);
 
         int count = jobRecruitService.queryAllJobRecruitNotApprove();
 
