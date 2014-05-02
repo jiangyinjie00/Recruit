@@ -311,11 +311,18 @@ angular.module('recruitApp.controller')
         
         if ($rootScope.currentUser.roleID == 3) {
         	 restClient.post(RestfulAPI.JOB_UPDATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
-             	
+        		 alert("提交成功！");
+             	window.location.href = "#/editRecruit";
              });
+        } else if ($rootScope.currentUser.roleID == 2){
+        	restClient.post(RestfulAPI.JOB_RESTART_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
+       		 alert("重启成功！");
+            	window.location.href = "#/editRecruit";
+            });
         } else {
         	 restClient.post(RestfulAPI.JOB_CREATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
-             	
+             	alert("创建成功 !");
+             	window.location.href = "#/backStage";
              });
         }
         

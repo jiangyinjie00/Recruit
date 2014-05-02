@@ -72,7 +72,7 @@
     <div>
         <ul>
             <li ng-repeat="history in jobRequest.jobRequestHistoryEntityExts">
-                <span>操作人: {{history.officername}}       操作时间: {{history.operationdate}}</span>
+                <span>操作人: {{history.officername}}       操作时间: {{history.operationDateFormat}}     </span>
                 <span>状态: {{history.statusEntityExt.defaultinfomation}}       操作内容: {{history.operation}}</span>
             </li>
         </ul>

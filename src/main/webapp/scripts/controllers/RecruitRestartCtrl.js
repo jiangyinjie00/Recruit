@@ -39,7 +39,7 @@ angular.module('recruitApp.controller')
         });
     };
     
-    var template_operation = '<div class="ngCellText"><a href="#/jobDetail/{{COL_FIELD}}">查看</a></div>';
+    var template_operation = '<div class="ngCellText"><a href="#/recruitRestart/{{COL_FIELD}}">查看</a></div>';
  // Initialize the grid option.
     $scope.gridOptions.columnDefs = [
              {

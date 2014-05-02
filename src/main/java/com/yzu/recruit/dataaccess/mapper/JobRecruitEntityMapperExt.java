@@ -29,4 +29,6 @@ public interface JobRecruitEntityMapperExt extends JobRecruitEntityMapper {
     List<JobRecruitEntityExt> queryFinishedJobs(@Param("page")Pagination pagination, @Param("currentDate")Date currentDate);
 
     int queryAllFinishedJobs(@Param("currentDate")Date currentDate);
+
+    void updateByJobRecruitID(JobRecruitEntityExt jobRecruitEntityExtFormat);
 }

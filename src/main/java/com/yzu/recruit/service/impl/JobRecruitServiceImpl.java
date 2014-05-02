@@ -88,7 +88,7 @@ public class JobRecruitServiceImpl implements JobRecruitService {
     @Override
     public void updateJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt) {
         JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.stringToDate(jobRecruitEntityExt);
-        jobRecruitEntityMapperExt.saveJobRecruitEntityExt(jobRecruitEntityExtFormat);
+        jobRecruitEntityMapperExt.updateByJobRecruitID(jobRecruitEntityExtFormat);
         int jobrecruitid = jobRecruitEntityExt.getJobrecruitid();
         List<JobRequireEntityExt> jobRequireEntityExts = jobRecruitEntityExt.getJobRequireEntityExts();
         List<JobResponsibilityEntityExt> jobResponsibilityEntityExts = jobRecruitEntityExt.getJobResponsibilityEntityExts();
@@ -130,6 +130,41 @@ public class JobRecruitServiceImpl implements JobRecruitService {
     public int queryAllFinishedJobs() {
         Date currentDate = new Date();
         return jobRecruitEntityMapperExt.queryAllFinishedJobs(currentDate);
+    }
+
+    @Override
+    public int restartJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt) {
+        JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.stringToDate(jobRecruitEntityExt);
+        jobRecruitEntityMapperExt.saveJobRecruitEntityExt(jobRecruitEntityExtFormat);
+        int jobrecruitid = jobRecruitEntityExt.getJobrecruitid();
+        List<JobRequireEntityExt> jobRequireEntityExts = jobRecruitEntityExt.getJobRequireEntityExts();
+        List<JobResponsibilityEntityExt> jobResponsibilityEntityExts = jobRecruitEntityExt.getJobResponsibilityEntityExts();
+        if (null != jobRequireEntityExts && !jobRequireEntityExts.isEmpty()) {
+
+            for (JobRequireEntityExt jobRequireEntityExt : jobRequireEntityExts) {
+                jobRequireEntityExt.setJobrecruitid(jobrecruitid);
+                if (null != jobRequireEntityExt.getJobrequireid() && jobRequireEntityExt.getJobrequireid() > 0) {
+                    if (!jobRequireEntityExt.getMarkfordelete()) {
+                        jobRequireService.addJobRequire(jobRequireEntityExt);
+                    }
+                } else {
+                    jobRequireService.addJobRequire(jobRequireEntityExt);
+                }
+            }
+        }
+        if (null != jobResponsibilityEntityExts && !jobResponsibilityEntityExts.isEmpty()) {
+            for (JobResponsibilityEntityExt jobResponsibilityEntityExt : jobResponsibilityEntityExts) {
+                jobResponsibilityEntityExt.setJobrecruitid(jobrecruitid);
+                if (null != jobResponsibilityEntityExt.getJobresponsibilityid() && jobResponsibilityEntityExt.getJobresponsibilityid() > 0) {
+                    if (!jobResponsibilityEntityExt.getMarkfordelete()) {
+                        jobResponsibilityService.saveJobResponsibility(jobResponsibilityEntityExt);
+                    }
+                } else {
+                    jobResponsibilityService.saveJobResponsibility(jobResponsibilityEntityExt);
+                }
+            }
+        }
+        return jobrecruitid;
     }
 
 }

@@ -60,6 +60,16 @@ public class JobRecruitController {
 
     }
 
+    @RequestMapping(value = "/job/createRestartJobRecruit", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody JsonResponse<Integer> createRestartJobRecruit(HttpServletRequest request,
+            HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {
+        jobRecruitEntityExt.setMarkfordelete(false);
+        jobRecruitEntityExt.setApprove(false);
+        int jobRecruitID = jobRecruitService.restartJobRecruitEntityExt(jobRecruitEntityExt);
+        return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, jobRecruitID);
+
+    }
+
     @RequestMapping(value = "/job/updateJobRecruit", method = RequestMethod.POST, produces = "application/json")
     public @ResponseBody JsonResponse<Integer> updateJobRecruit(HttpServletRequest request,
             HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {

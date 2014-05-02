@@ -1,0 +1,70 @@
+<div class="maxwidth" ng-init="initAddOrEditRecruit()">
+    <div class="clear">
+        <div class="row">
+            <label>职位类别：</label> <span class="span2"> 
+            <select ui-select2="{'tabIndex' : 1, 'dropdownCssClass':'select-dropdown hide-dropdown-search' }" 
+               id="type" name="type" ng-model="jobRecruit.type" ng-options="value for (key , value) in types">
+           </select>
+            </span>
+        </div>
+        <div class="row">
+            <label>职位：</label> 
+            <span class="span2"> 
+            <select ui-select2="{'tabIndex' : 1, 'dropdownCssClass':'select-dropdown hide-dropdown-search' }" 
+               id="jobid" name="jobid" ng-model="jobRecruit.job" ng-options="job.name for job in jobList">
+           </select>
+            </span>
+        </div>
+        <div class="row">
+            <label>工作地点：</label> <span class="span2"> 
+            <select ui-select2="{'tabIndex' : 1, 'dropdownCssClass':'select-dropdown hide-dropdown-search' }" 
+               id="city" name="city" ng-model="jobRecruit.city" ng-options="value for (key , value) in citys">
+           </select>
+            </span>
+        </div>
+        <div class="row">
+            <label>人数：</label> <span class="span2"> 
+            <input class="input-style" ng-model="jobRecruit.person" />
+            </span>
+        </div>
+        <div class="row">
+            <label>开始时间：</label> <span class="span2"> 
+            <input class="input-style" recruit-datepicker="{showMeridian: false}" ng-model="jobRecruit.startTimeFormat" />
+            </span>
+        </div>
+        
+        <div class="row" ng-model="jobRecruit.expiretime">
+            <label>结束时间：</label> 
+            <span class="span2">
+            <input class="input-style" recruit-datepicker="{showMeridian: false}" ng-model="jobRecruit.expireTimeFormat" />
+            </span>
+        </div>
+        
+    </div>
+    <div id="jobRequire">
+	    <label class="job">工作职责：</label> 
+	    <button ng-click="addJobRequire()">添加职责</button>
+    </div>
+    <div class="job-repeat" ng-repeat="jobRequire in jobRequireList">
+        <div class="row">
+            <span class="span2">
+                <textarea class="textarte-style1" ng-model="jobRequire.description" /></textarea>
+            </span> 
+            <button class="left" ng-click=deleteJobRequire(jobRequire.num)>删除职责</button>
+        </div>
+    </div>
+    <div id="jobResponsibility">
+	    <label class="job">工作要求：</label>
+	    <button class="add-button" ng-click="addJobResponsibility()">添加要求</button>
+    </div>
+    <div class="job-repeat" ng-repeat="jobResponsibility in jobResponsibilityList">
+        <div class="row">
+            <span class="span2">
+             <textarea class="textarte-style1" ng-model="jobResponsibility.description" ></textarea>
+             </span>
+            <button class="left"  ng-click=deleteJobResponsibility(jobResponsibility.num)>删除要求</button>
+        </div>
+    </div>
+    
+    <button class="button1" ng-click="restartRecruit()">重启</button>
+</div>

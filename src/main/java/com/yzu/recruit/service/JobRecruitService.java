@@ -25,4 +25,6 @@ public interface JobRecruitService {
     List<JobRecruitEntityExt> queryFinishedJobs(Pagination pagination);
 
     int queryAllFinishedJobs();
+
+    int restartJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
 }
