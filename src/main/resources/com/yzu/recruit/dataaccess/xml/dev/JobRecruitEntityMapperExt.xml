@@ -77,7 +77,7 @@
         _JobResponsibility.JobRecruitID AND _JobResponsibility.MarkForDelete = false
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
         WHERE
-        _JobRecruit.JobRecruitID = #{jobRecruitID} 
+        _JobRecruit.JobRecruitID = #{jobRecruitID}
     </select>
 
     <select id="queryJobRecruitEntityExts" resultMap="JobRecruitExtResultMap" parameterType="map">

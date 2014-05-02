@@ -151,6 +151,16 @@
             <version>3.2.1.RELEASE</version>
         </dependency>
         <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>3.2.1.RELEASE</version>
@@ -165,7 +175,7 @@
             <artifactId>commons-collections</artifactId>
             <version>20040616</version>
         </dependency>
-        
+
     </dependencies>
     <build>
         <finalName>recruit</finalName>
