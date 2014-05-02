@@ -184,3 +184,7 @@ VALUES
 (34, '2014-03-16 16:55:48', 11, 'George3', 16, 1),
 (35, '2014-03-16 16:55:48', 11, 'George3', 16, 2),
 (36, '2014-03-16 16:55:48', 11, 'George3', 16, 4);
+
+INSERT INTO `System` (`SystemID`, `Name`, `Type`, `LegalPerson`, `RegisterFund`, `RegisterTime`, `TotalPeople`, `Address`, `Telephone`, `Email`)
+VALUES
+(1, 'company', 'Computer software', 'Legal Person', '一千万美元', '1998-09-07 00:00:00', '10000', 'Shanghai, China', '13888888888', 'contact@company.com');
