@@ -64,7 +64,7 @@ public class JobRecruitController {
     public @ResponseBody JsonResponse<Integer> createRestartJobRecruit(HttpServletRequest request,
             HttpServletResponse response, @RequestBody JobRecruitEntityExt jobRecruitEntityExt) {
         jobRecruitEntityExt.setMarkfordelete(false);
-        jobRecruitEntityExt.setApprove(false);
+        jobRecruitEntityExt.setApprove(true);
         int jobRecruitID = jobRecruitService.restartJobRecruitEntityExt(jobRecruitEntityExt);
         return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, jobRecruitID);
 

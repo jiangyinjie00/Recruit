@@ -309,16 +309,11 @@ angular.module('recruitApp.controller')
         $scope.jobRecruit.jobRequireEntityExts = $scope.jobRequireList;
         $scope.jobRecruit.jobResponsibilityEntityExts = $scope.jobResponsibilityList;
         
-        if ($rootScope.currentUser.roleID == 3) {
+        if ($rootScope.currentUser.roleID == 3 || $rootScope.currentUser.roleID == 2) {
         	 restClient.post(RestfulAPI.JOB_UPDATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
         		 alert("提交成功！");
              	window.location.href = "#/editRecruit";
              });
-        } else if ($rootScope.currentUser.roleID == 2){
-        	restClient.post(RestfulAPI.JOB_RESTART_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
-       		 alert("重启成功！");
-            	window.location.href = "#/editRecruit";
-            });
         } else {
         	 restClient.post(RestfulAPI.JOB_CREATE_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
              	alert("创建成功 !");
@@ -327,6 +322,39 @@ angular.module('recruitApp.controller')
         }
         
        
+    };
+    
+    $scope.restartJobRecruit = function() {
+    	$scope.jobRecruit.jobid = $scope.jobRecruit.job.jobid;
+    	delete $scope.jobRecruit.job;
+    	
+    	for(var index in $scope.deleteJobRequireList) {
+    		$scope.deleteJobRequireList[index].markfordelete = true;
+    		$scope.jobRequireList.push($scope.deleteJobRequireList[index]);
+    	}
+    	
+    	for(var index in $scope.deleteJobResponsibilityList) {
+    		$scope.deleteJobResponsibilityList[index].markfordelete = true;
+    		$scope.jobResponsibilityList.push($scope.deleteJobResponsibilityList[index]);
+    	}
+    	
+    	for(var index in $scope.jobRequireList) {
+    		delete $scope.jobRequireList[index].$$hashKey;
+    	}
+    	
+    	for(var index in $scope.jobResponsibilityList) {
+    		delete $scope.jobResponsibilityList[index].$$hashKey;
+    	}
+    	
+    	$scope.jobRecruit.jobRequireEntityExts = $scope.jobRequireList;
+    	$scope.jobRecruit.jobResponsibilityEntityExts = $scope.jobResponsibilityList;
+    	
+		restClient.post(RestfulAPI.JOB_RESTART_JOB_RECRUIT, {}, $scope.jobRecruit).then(function() {
+			alert("重启成功！");
+			window.location.href = "#/editRecruit";
+		});
+    	
+    	
     };
     
     $scope.updateJobRecruit = function() {

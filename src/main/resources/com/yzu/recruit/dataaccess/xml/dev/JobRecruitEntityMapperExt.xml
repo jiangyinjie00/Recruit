@@ -186,7 +186,8 @@
         JobID,
         DepartmentID,
         MarkForDelete,
-        Approve
+        Approve,
+        City
         ) VALUES (
         #{starttime},
         #{expiretime},
@@ -195,7 +196,8 @@
         #{jobid},
         #{departmentid},
         #{markfordelete},
-        #{approve}
+        #{approve},
+        #{city}
         )
     </insert>
 

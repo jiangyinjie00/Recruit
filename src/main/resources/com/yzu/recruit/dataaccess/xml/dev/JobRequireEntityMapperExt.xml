@@ -27,12 +27,10 @@
         </selectKey>
         INSERT INTO
             JobRequire (
-                JobRequireID,
                 JobRecruitID, 
                 Description,
                 Num
             ) VALUES (
-                #{jobrequireid},
                 #{jobrecruitid}, 
                 #{description},
                 #{num}
