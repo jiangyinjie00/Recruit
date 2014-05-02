@@ -67,7 +67,7 @@
         <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
-        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentEntityBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />
         FROM
         JobRequest AS _JobRequest
@@ -112,7 +112,7 @@
         <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
-        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentEntityBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />
         FROM
         JobRequest AS _JobRequest
@@ -145,7 +145,7 @@
         <include refid="com.yzu.recruit.dataaccess.mapper.UserEntityMapperExt.UserBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobRecruitEntityMapperExt.JobRecruitBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
-        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentEntityBaseColumn" />,
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />,
         <include refid="com.yzu.recruit.dataaccess.mapper.StatusEntityMapperExt.StatusBaseColumn" />
         FROM
         JobRequest AS _JobRequest

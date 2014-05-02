@@ -21,4 +21,8 @@ public interface JobRecruitService {
     List<JobRecruitEntityExt> queryJobRecruitNotApprove(Pagination pagination);
 
     int queryAllJobRecruitNotApprove();
+
+    List<JobRecruitEntityExt> queryFinishedJobs(Pagination pagination);
+
+    int queryAllFinishedJobs();
 }

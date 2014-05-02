@@ -26,6 +26,7 @@ import com.yzu.recruit.service.DepartmentService;
 import com.yzu.recruit.service.JobRecruitService;
 import com.yzu.recruit.web.converter.CriteriaConverter;
 import com.yzu.recruit.web.model.RecruitQueryVo;
+import com.yzu.recruit.web.model.RequestQueryVo;
 import com.yzu.recruit.web.model.UserModel;
 
 @Controller
@@ -93,6 +94,26 @@ public class JobRecruitController {
         jobRecruitPageModel.setPaging(pageModel);
 
         return new JsonResponse<PageDataModel<JobRecruitEntityExt>>(Constant.STATUS_SUCCESS, jobRecruitPageModel);
+
+    }
+
+    @RequestMapping(value = "/job/finishedJobs", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody JsonResponse<PageDataModel<JobRecruitEntityExt>> queryFinishedJobs(HttpServletRequest request,
+            HttpServletResponse response, @RequestBody RequestQueryVo requestQueryVo) {
+
+        Pagination pagination = CriteriaConverter.toPagination(requestQueryVo.getPageModel());
+
+        List<JobRecruitEntityExt> list = jobRecruitService.queryFinishedJobs(pagination);
+
+        int count = jobRecruitService.queryAllFinishedJobs();
+        PageModel pageModel = requestQueryVo.getPageModel();
+        pageModel.setRowCount(count);
+
+        PageDataModel<JobRecruitEntityExt> pageDataModel = new PageDataModel<JobRecruitEntityExt>();
+        pageDataModel.setData(list);
+        pageDataModel.setPaging(pageModel);
+
+        return new JsonResponse<PageDataModel<JobRecruitEntityExt>>(Constant.STATUS_SUCCESS, pageDataModel);
 
     }
 

@@ -69,7 +69,7 @@ angular.module('recruitApp.controller')
                 	displayName: "查看简历",
                 	cellTemplate: template_resume_operation,
                 	//headerCellTemplate: $scope.headerCellTemplate,
-                	width:98
+                	width:108
                 },
        ];
     $scope.refresh = function() {

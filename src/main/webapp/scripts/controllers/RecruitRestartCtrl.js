@@ -1,5 +1,5 @@
 angular.module('recruitApp.controller')
-.controller('EditRecruitCtrl', ['$scope', 'restClient', '$injector', '$routeParams', '$rootScope', function($scope, restClient, $injector, $routeParams, $rootScope) {
+.controller('recruitRestartCtrl', ['$scope', 'restClient', '$injector', '$routeParams', '$rootScope', function($scope, restClient, $injector, $routeParams, $rootScope) {
 	$injector.invoke(BaseCtrl, this, {$scope: $scope});
   $scope.headerCellTemplate = '<div class="ngHeaderSortColumn {{col.headerClass}}" ng-style="{\'cursor\': col.cursor}" ng-class="{ \'ngSorted\': !noSortVisible }">'+
   '<div ng-click="col.sort($event)" class="ngHeaderText">6666</div>'+
@@ -17,15 +17,16 @@ angular.module('recruitApp.controller')
       columnDefs : []
   };
   
-    $scope.initEditRecruit = function() {
-    	$scope.resetPaging();
-    	$scope.refresh();
+    $scope.init = function() {
+        $scope.criteria = {};
+        $scope.resetPaging();
+        $scope.refresh();
     };
     
     
     
     $scope.refresh = function() {
-    	restClient.post(RestfulAPI.JOB_JOBSNOTAPPROVE, {}, $scope.criteria).then(function() {
+    	restClient.post(RestfulAPI.JOB_FINSHED_JOBS, {}, $scope.criteria).then(function() {
         	$scope.list = restClient.getResponse();
         	$scope.readRecords = false;
             $scope.hasRecords = $scope.list.data.length == 0 ? false : true;
@@ -38,7 +39,7 @@ angular.module('recruitApp.controller')
         });
     };
     
-    var template_operation = '<div class="ngCellText"><a href="#/editRecruit/{{COL_FIELD}}">查看</a></div>';
+    var template_operation = '<div class="ngCellText"><a href="#/jobDetail/{{COL_FIELD}}">查看</a></div>';
  // Initialize the grid option.
     $scope.gridOptions.columnDefs = [
              {
@@ -91,7 +92,4 @@ angular.module('recruitApp.controller')
             	 width:98
              }
     ];
- 
-    
-    
 }]);

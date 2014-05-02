@@ -63,6 +63,7 @@ public class UserController {
             session.setAttribute("USER", UserConverter.entityToModel(userEntity));
             response.setStatus(IHttpStateCode.OK);
         } catch (Exception exception) {
+            logger.info(exception.getMessage());
             return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, 1);
         }
         return new JsonResponse<Integer>(Constant.STATUS_SUCCESS, 0);

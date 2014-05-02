@@ -1,5 +1,6 @@
 package com.yzu.recruit.dataaccess.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -13,15 +14,19 @@ public interface JobRecruitEntityMapperExt extends JobRecruitEntityMapper {
 
     JobRecruitEntityExt getJobRecruitEntityExtByID(@Param("jobRecruitID") int jobRecruitID);
 
-    List<JobRecruitEntityExt> queryJobRecruitEntityExts(@Param("criteria") JobRecruitCriteria criteria, @Param("page")Pagination page);
+    List<JobRecruitEntityExt> queryJobRecruitEntityExts(@Param("criteria") JobRecruitCriteria criteria, @Param("page")Pagination page, @Param("currentDate")Date currentDate);
 
     int saveJobRecruitEntityExt(JobRecruitEntityExt jobRecruitEntityExt);
 
-    int getJobRecruitEntityExtCountByCriateria(@Param("criteria") JobRecruitCriteria criteria);
+    int getJobRecruitEntityExtCountByCriateria(@Param("criteria") JobRecruitCriteria criteria, @Param("currentDate")Date currentDate);
 
     int deleteJobRecruitEntityExt(@Param("jobRecruitID") int jobRecruitID);
 
-    List<JobRecruitEntityExt> queryJobRecruitNotApprove(@Param("page")Pagination pagination);
+    List<JobRecruitEntityExt> queryJobRecruitNotApprove(@Param("page")Pagination pagination, @Param("currentDate")Date currentDate);
 
-    int queryAllJobRecruitNotApprove();
+    int queryAllJobRecruitNotApprove(@Param("currentDate")Date currentDate);
+
+    List<JobRecruitEntityExt> queryFinishedJobs(@Param("page")Pagination pagination, @Param("currentDate")Date currentDate);
+
+    int queryAllFinishedJobs(@Param("currentDate")Date currentDate);
 }

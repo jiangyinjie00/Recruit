@@ -2,38 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt">
     <resultMap id="DepartmentExtBaseResultMap" type="DepartmentEntityExt">
-        <id column="DepartmentID" jdbcType="INTEGER" property="departmentid" />
-        <result column="Name" jdbcType="VARCHAR" property="name" />
-        <result column="Type" jdbcType="VARCHAR" property="type" />
-        <result column="Leader" jdbcType="VARCHAR" property="leader" />
-        <result column="OfficeAddress" jdbcType="VARCHAR" property="officeaddress" />
-        <result column="OfficeTelephone" jdbcType="VARCHAR" property="officetelephone" />
-        <result column="PostalCode" jdbcType="VARCHAR" property="postalcode" />
-        <result column="PostalAddress" jdbcType="VARCHAR" property="postaladdress" />
-        <result column="UserID" jdbcType="INTEGER" property="userid" />
-        <result column="MarkForDelete" jdbcType="BIT" property="markfordelete" />
-        <result column="Introduction" jdbcType="LONGVARCHAR" property="introduction" />
+        <id column="DEPARTMENT_DEPARTMENTID" jdbcType="INTEGER" property="departmentid" />
+        <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="name" />
+        <result column="DEPARTMENT_TYPE" jdbcType="VARCHAR" property="type" />
+        <result column="DEPARTMENT_LEADER" jdbcType="VARCHAR" property="leader" />
+        <result column="DEPARTMENT_OFFICEADDRESS" jdbcType="VARCHAR" property="officeaddress" />
+        <result column="DEPARTMENT_OFFICETELEPHONE" jdbcType="VARCHAR" property="officetelephone" />
+        <result column="DEPARTMENT_POSTALCODE" jdbcType="VARCHAR" property="postalcode" />
+        <result column="DEPARTMENT_POSTALADDRESS" jdbcType="VARCHAR" property="postaladdress" />
+        <result column="DEPARTMENT_USERID" jdbcType="INTEGER" property="userid" />
+        <result column="DEPARTMENT_MARKFORDELETE" jdbcType="BIT" property="markfordelete" />
+        <result column="DEPARTMENT_INTRODUCTION" jdbcType="LONGVARCHAR" property="introduction" />
     </resultMap>
 
     <resultMap type="DepartmentEntityExt" id="DepartmentExtResultMap" extends="DepartmentExtBaseResultMap"></resultMap>
 
-    <sql id="DepartmentEntityBaseColumn">
-        _Department.DepartmentID,
-        _Department.Name,
-        _Department.Type,
-        _Department.Leader,
-        _Department.OfficeAddress,
-        _Department.OfficeTelephone,
-        _Department.PostalCode,
-        _Department.PostalAddress,
-        _Department.UserID,
-        _Department.MarkForDelete,
-        _Department.Introduction
+    <sql id="DepartmentBaseColumn">
+        _Department.DepartmentID AS DEPARTMENT_DEPARTMENTID,
+        _Department.Name AS DEPARTMENT_NAME,
+        _Department.Type AS DEPARTMENT_TYPE,
+        _Department.Leader AS DEPARTMENT_LEADER,
+        _Department.OfficeAddress AS DEPARTMENT_OFFICEADDRESS,
+        _Department.OfficeTelephone AS DEPARTMENT_OFFICETELEPHONE,
+        _Department.PostalCode AS DEPARTMENT_POSTALCODE,
+        _Department.PostalAddress AS DEPARTMENT_POSTALADDRESS,
+        _Department.UserID AS DEPARTMENT_USERID,
+        _Department.MarkForDelete AS DEPARTMENT_MARKFORDELETE,
+        _Department.Introduction AS DEPARTMENT_INTRODUCTION
     </sql>
 
     <select id="getDepartment" resultMap="DepartmentExtResultMap" parameterType="java.lang.Integer">
         SELECT
-            <include refid="DepartmentEntityBaseColumn" />
+            <include refid="DepartmentBaseColumn" />
         FROM
             Department AS _Department
         WHERE
@@ -42,7 +42,7 @@
     
     <select id="getDepartmentByUserID" resultMap="DepartmentExtResultMap" parameterType="java.lang.Integer">
         SELECT
-            <include refid="DepartmentEntityBaseColumn" />
+            <include refid="DepartmentBaseColumn" />
         FROM
             Department AS _Department
         WHERE

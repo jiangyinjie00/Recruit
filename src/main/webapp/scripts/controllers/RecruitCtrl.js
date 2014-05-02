@@ -107,28 +107,35 @@ angular.module('recruitApp.controller')
                  displayName: "人数",
                  //cellTemplate: template,
                  //headerCellTemplate: $scope.headerCellTemplate,
-                 width:150
+                 width:100
              },
              {
                  field: 'city',
                  displayName: "地点",
                  //cellTemplate: template,
                  //headerCellTemplate: $scope.headerCellTemplate,
-                 width:180
+                 width:120
              },
              {
                  field: 'startTimeFormat',
                  displayName: "发布时间",
                  //cellTemplate: template,
                  //headerCellTemplate: $scope.headerCellTemplate,
-                 width:200
+                 width:150
+             },
+             {
+            	 field: 'expireTimeFormat',
+            	 displayName: "结束时间",
+            	 //cellTemplate: template,
+            	 //headerCellTemplate: $scope.headerCellTemplate,
+            	 width:150
              },
              {
             	 field: 'jobrecruitid',
             	 displayName: "查看",
             	 cellTemplate: template_operation,
             	 //headerCellTemplate: $scope.headerCellTemplate,
-            	 width:75
+            	 width:98
              }
     ];
  

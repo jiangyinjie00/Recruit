@@ -30,13 +30,10 @@
         _JobRecruit.StartTime AS JOBRECRUIT_STARTTIME,
         _JobRecruit.ExpireTime AS JOBRECRUIT_EXPIRETIME,
         _JobRecruit.Person AS JOBRECRUIT_PERSON,
-        _JobRecruit.Type AS
-        JOBRECRUIT_TYPE,
-        _JobRecruit.City AS
-        JOBRECRUIT_CITY,
+        _JobRecruit.Type AS JOBRECRUIT_TYPE,
+        _JobRecruit.City AS JOBRECRUIT_CITY,
         _JobRecruit.DepartmentID AS JOBRECRUIT_DEPARTMENTID,
-        _JobRecruit.MarkForDelete AS
-        JOBRECRUIT_MARKFORDELETE,
+        _JobRecruit.MarkForDelete AS JOBRECRUIT_MARKFORDELETE,
         _JobRecruit.JobID AS JOBRECRUIT_JOBID,
         _JobRecruit.Timestamp AS JOBRECRUIT_TIMESTAMP,
         _JobRecruit.Approve AS JOBRECRUIT_APPROVE
@@ -70,24 +67,30 @@
         ,
         <include refid="com.yzu.recruit.dataaccess.mapper.JobResponsibilityEntityMapperExt.JobResponsibilityBaseColumn" />
         ,
-        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />
         FROM JobRecruit AS _JobRecruit
+        LEFT JOIN Department AS _Department ON _JobRecruit.DepartmentID = _Department.DepartmentID
         LEFT JOIN JobRequire AS _JobRequire ON _JobRecruit.JobRecruitID = _JobRequire.JobRecruitID AND _JobRequire.MarkForDelete = false
         LEFT JOIN JobResponsibility AS _JobResponsibility ON _JobRecruit.JobRecruitID =
         _JobResponsibility.JobRecruitID AND _JobResponsibility.MarkForDelete = false
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
         WHERE
-        _JobRecruit.JobRecruitID = #{jobRecruitID}
+        _JobRecruit.JobRecruitID = #{jobRecruitID} 
     </select>
 
     <select id="queryJobRecruitEntityExts" resultMap="JobRecruitExtResultMap" parameterType="map">
         SELECT
         <include refid="JobRecruitBaseColumn" />
         ,
-        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />
         FROM JobRecruit AS _JobRecruit
+        LEFT JOIN Department AS _Department ON _JobRecruit.DepartmentID = _Department.DepartmentID
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true AND _JobRecruit.ExpireTime > #{currentDate}
         <if test="criteria != null">
             <include refid="Criteria_Where_Clause" />
         </if>
@@ -104,7 +107,7 @@
         COUNT(*)
         FROM JobRecruit AS _JobRecruit
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true AND _JobRecruit.ExpireTime > #{currentDate}
         <if test="criteria != null">
             <include refid="Criteria_Where_Clause" />
         </if>
@@ -117,10 +120,13 @@
         SELECT
         <include refid="JobRecruitBaseColumn" />
         ,
-        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />
         FROM JobRecruit AS _JobRecruit
+        LEFT JOIN Department AS _Department ON _JobRecruit.DepartmentID = _Department.DepartmentID
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = false
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = false AND _JobRecruit.ExpireTime > #{currentDate}
         <if test="page != null">
             LIMIT ${page.startRow}, ${page.pageSize}
         </if>
@@ -131,7 +137,32 @@
         COUNT(*)
         FROM JobRecruit AS _JobRecruit
         LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
-        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = false
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = false AND _JobRecruit.ExpireTime > #{currentDate}
+    </select>
+    
+    <select id="queryFinishedJobs" resultMap="JobRecruitExtResultMap" parameterType="map">
+        SELECT
+        <include refid="JobRecruitBaseColumn" />
+        ,
+        <include refid="com.yzu.recruit.dataaccess.mapper.JobEntityMapperExt.JobBaseColumn" />,
+        
+        <include refid="com.yzu.recruit.dataaccess.mapper.DepartmentEntityMapperExt.DepartmentBaseColumn" />
+        FROM JobRecruit AS _JobRecruit
+        LEFT JOIN Department AS _Department ON _JobRecruit.DepartmentID = _Department.DepartmentID
+        LEFT JOIN Job AS _Job ON _JobRecruit.JobID = _Job.JobID
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true AND #{currentDate} >_JobRecruit.ExpireTime
+        GROUP BY _JobRecruit.JobID, _JobRecruit.DepartmentID
+        <if test="page != null">
+            LIMIT ${page.startRow}, ${page.pageSize}
+        </if>
+    </select>
+    
+    <select id="queryAllFinishedJobs" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM
+    (SELECT *
+        FROM JobRecruit AS _JobRecruit
+        WHERE _JobRecruit.MarkForDelete = false AND _JobRecruit.Approve = true AND #{currentDate} > _JobRecruit.ExpireTime
+        GROUP BY _JobRecruit.JobID, _JobRecruit.DepartmentID) AS JobCount
     </select>
 
     <delete id="deleteByJobRecruitID" parameterType="java.lang.Integer">

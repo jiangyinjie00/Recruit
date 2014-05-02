@@ -53,6 +53,7 @@ var RestfulAPI = {
         "USER_RESUME" : "user/getResume/:userID",
         "JOB_DETAIL" : "job/jobDetail/:jobRecruitID",
         "JOB_JOBS" : "job/jobs",
+        "JOB_FINSHED_JOBS" : "job/finishedJobs",
         "JOB_JOBSNOTAPPROVE" : "job/jobsNotApprove",
         "JOB_CREATE_JOB_REQUEST" : "job/createJobRequest",
         "JOB_CREATE_JOB_RECRUIT" : "job/createJobRecruit",

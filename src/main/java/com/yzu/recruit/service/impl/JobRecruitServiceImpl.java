@@ -1,6 +1,7 @@
 package com.yzu.recruit.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,15 +64,16 @@ public class JobRecruitServiceImpl implements JobRecruitService {
     public PageDataModel<JobRecruitEntityExt> queryJobRecruitEntityExts(CriteriaMap criteriaMap, Pagination pagination) {
         PageDataModel<JobRecruitEntityExt> jobRecruitPageModel = new PageDataModel<JobRecruitEntityExt>();
         JobRecruitCriteria criteria = new JobRecruitCriteria();
+        Date currentDate = new Date();
         criteria.convertCriteria(criteria, criteriaMap);
-        List<JobRecruitEntityExt>  list = jobRecruitEntityMapperExt.queryJobRecruitEntityExts(criteria, pagination);
+        List<JobRecruitEntityExt>  list = jobRecruitEntityMapperExt.queryJobRecruitEntityExts(criteria, pagination, currentDate);
         List<JobRecruitEntityExt> jobRecruitEntityExts = new ArrayList<JobRecruitEntityExt>();
         for (JobRecruitEntityExt jobRecruitEntityExt : list) {
             JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.dateToString(jobRecruitEntityExt);
             jobRecruitEntityExts.add(jobRecruitEntityExtFormat);
         }
         PageModel pageModel = new PageModel();
-        int total = jobRecruitEntityMapperExt.getJobRecruitEntityExtCountByCriateria(criteria);
+        int total = jobRecruitEntityMapperExt.getJobRecruitEntityExtCountByCriateria(criteria, currentDate);
         pageModel.setRowCount(total);
         jobRecruitPageModel.setData(jobRecruitEntityExts);
         jobRecruitPageModel.setPaging(pageModel);
@@ -96,7 +98,8 @@ public class JobRecruitServiceImpl implements JobRecruitService {
 
     @Override
     public List<JobRecruitEntityExt> queryJobRecruitNotApprove(Pagination pagination) {
-        List<JobRecruitEntityExt>  list = jobRecruitEntityMapperExt.queryJobRecruitNotApprove(pagination);
+        Date currentDate = new Date();
+        List<JobRecruitEntityExt>  list = jobRecruitEntityMapperExt.queryJobRecruitNotApprove(pagination, currentDate);
         List<JobRecruitEntityExt> jobRecruitEntityExts = new ArrayList<JobRecruitEntityExt>();
         for (JobRecruitEntityExt jobRecruitEntityExt : list) {
             JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.dateToString(jobRecruitEntityExt);
@@ -107,7 +110,26 @@ public class JobRecruitServiceImpl implements JobRecruitService {
 
     @Override
     public int queryAllJobRecruitNotApprove() {
-        return jobRecruitEntityMapperExt.queryAllJobRecruitNotApprove();
+        Date currentDate = new Date();
+        return jobRecruitEntityMapperExt.queryAllJobRecruitNotApprove(currentDate);
+    }
+
+    @Override
+    public List<JobRecruitEntityExt> queryFinishedJobs(Pagination pagination) {
+        Date currentDate = new Date();
+        List<JobRecruitEntityExt>  list = jobRecruitEntityMapperExt.queryFinishedJobs(pagination, currentDate);
+        List<JobRecruitEntityExt> jobRecruitEntityExts = new ArrayList<JobRecruitEntityExt>();
+        for (JobRecruitEntityExt jobRecruitEntityExt : list) {
+            JobRecruitEntityExt jobRecruitEntityExtFormat = JobRecruitConverter.dateToString(jobRecruitEntityExt);
+            jobRecruitEntityExts.add(jobRecruitEntityExtFormat);
+        }
+        return jobRecruitEntityExts;
+    }
+
+    @Override
+    public int queryAllFinishedJobs() {
+        Date currentDate = new Date();
+        return jobRecruitEntityMapperExt.queryAllFinishedJobs(currentDate);
     }
 
 }
