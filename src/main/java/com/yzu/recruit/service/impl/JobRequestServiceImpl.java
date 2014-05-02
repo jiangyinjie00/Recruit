@@ -14,6 +14,7 @@ import com.yzu.recruit.dataaccess.model.JobRequestHistoryEntityExt;
 import com.yzu.recruit.service.JobRequestHistoryService;
 import com.yzu.recruit.service.JobRequestService;
 import com.yzu.recruit.web.converter.JobRequestConverter;
+import com.yzu.recruit.web.converter.JobRequestHistoryConverter;
 
 @Service
 public class JobRequestServiceImpl implements JobRequestService {
@@ -121,6 +122,14 @@ public class JobRequestServiceImpl implements JobRequestService {
     @Override
     public JobRequestEntityExt getJobRequestByID(int jobRequestID) {
         JobRequestEntityExt jobRequestEntityExt = jobRequestEntityMapperExt.selectJobRequestByID(jobRequestID);
+        if (null != jobRequestEntityExt.getJobRequestHistoryEntityExts() && !jobRequestEntityExt.getJobRequestHistoryEntityExts().isEmpty()) {
+            List<JobRequestHistoryEntityExt> jobRequestHistoryEntityExts = new ArrayList<JobRequestHistoryEntityExt>();
+            for (JobRequestHistoryEntityExt jobRequestHistoryEntityExt : jobRequestEntityExt.getJobRequestHistoryEntityExts()) {
+                JobRequestHistoryEntityExt jobRequestHistoryEntityFormat = JobRequestHistoryConverter.dateToString(jobRequestHistoryEntityExt);
+                jobRequestHistoryEntityExts.add(jobRequestHistoryEntityFormat);
+            }
+            jobRequestEntityExt.setJobRequestHistoryEntityExts(jobRequestHistoryEntityExts);
+        }
         return JobRequestConverter.dateToString(jobRequestEntityExt);
     }
 
